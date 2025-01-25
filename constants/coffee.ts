@@ -89,6 +89,7 @@ export const coffees = [
     price: 4.99,
     category: "Macchiato",
     image: images.CaramelMacchiato,
+    rating: 4.6,
     description:
       "Vanilla-sweetened espresso marked with steamed milk and drizzled with rich caramel sauce, creating a perfectly balanced sweet coffee.",
   },

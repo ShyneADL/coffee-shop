@@ -10,7 +10,9 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
+import { coffees } from "@/constants/coffee";
 import Search from "@/components/Search";
+import CoffeeCard from "@/components/CoffeeCard";
 
 const Index = () => {
   const categories = [
@@ -24,10 +26,15 @@ const Index = () => {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const filteredCoffees = coffees.filter(
+    (coffee) =>
+      selectedCategory === "All Categories" ||
+      coffee.category === selectedCategory
+  );
 
   return (
     <SafeAreaView>
-      <ScrollView className="relative h-full">
+      <ScrollView className="relative h-full bg-[#F9F9F9]">
         {/* Top part */}
         <View className="w-full">
           <View className="absolute w-full h-[280px] top-0 bg-gradient-to-br from-[#111111] to-[#313131]"></View>
@@ -105,6 +112,18 @@ const Index = () => {
               </TouchableOpacity>
             ))}
           </ScrollView>
+          {/* Coffee cards */}
+          <View className="flex flex-row flex-wrap gap-x-[15px] gap-y-[24px] w-full"></View>
+          {filteredCoffees.map((coffee) => (
+            <CoffeeCard
+              key={coffee.id}
+              image={coffee.image}
+              title={coffee.name}
+              category={coffee.category}
+              price={coffee.price}
+              rating={coffee.rating}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
