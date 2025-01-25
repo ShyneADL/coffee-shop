@@ -1,11 +1,30 @@
-import { View, Text, Image, ScrollView, ImageBackground } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import Search from "@/components/Search";
 
 const Index = () => {
+  const categories = [
+    "All Categories",
+    "Macchiato",
+    "Latte",
+    "Americano",
+    "Mocha",
+    "Espresso",
+    "Cold Brew",
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+
   return (
     <SafeAreaView>
       <ScrollView className="relative h-full">
@@ -33,7 +52,7 @@ const Index = () => {
         </View>
         {/*Mid - Bottom part */}
         <View className="flex flex-1 px-6 mt-6">
-          {/* But one */}
+          {/* Buy one */}
           <ImageBackground
             source={images.Banner}
             className="flex gap-2 py-[13px] px-6 w-full h-[140px] rounded-[12px] overflow-hidden"
@@ -60,6 +79,32 @@ const Index = () => {
               </Text>
             </View>
           </ImageBackground>
+          {/* Coffee list */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            className="flex flex-row gap-4 items-center"
+          >
+            {categories.map((category) => (
+              <TouchableOpacity
+                key={category}
+                className={`${
+                  selectedCategory === category ? "bg-primary" : "bg-black-10"
+                } px-2 py-1 border-[6px]`}
+                onPress={() => setSelectedCategory(category)}
+              >
+                <Text
+                  className={`${
+                    selectedCategory === category
+                      ? "text-white font-Sora-semibold"
+                      : "text-black font-Sora"
+                  } leading-[150%] text-sm `}
+                >
+                  {category}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </View>
       </ScrollView>
     </SafeAreaView>
