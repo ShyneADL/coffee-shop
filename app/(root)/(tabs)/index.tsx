@@ -1,12 +1,16 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const index = () => {
+const Index = () => {
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <SafeAreaView>
+      <ScrollView className="relative h-full">
+        <View className="absolute w-full h-[280px] top-0 bg-gradient-to-br from-[#111111] to-[#313131]"></View>
+        <View className="px-6 mt-10"></View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
-export default index;
+export default Index;

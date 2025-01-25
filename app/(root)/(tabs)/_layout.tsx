@@ -6,11 +6,9 @@ import icons from "@/constants/icons";
 const TabIcon = ({
   focused,
   icon,
-  title,
 }: {
   focused: boolean;
   icon: ImageSourcePropType;
-  title: string;
 }) => (
   <View className="flex-1 mt-3 flex flex-col items-center">
     <Image
@@ -19,15 +17,6 @@ const TabIcon = ({
       resizeMode="contain"
       className="size-6"
     />
-    <Text
-      className={`${
-        focused
-          ? "text-primary-300 font-Sora-medium"
-          : "text-black-200 font-Sora"
-      } text-xs w-full text-center mt-1`}
-    >
-      {title}
-    </Text>
   </View>
 );
 
@@ -39,39 +28,47 @@ const TabsLayout = () => {
         tabBarStyle: {
           backgroundColor: "white",
           position: "absolute",
-          borderTopColor: "#0061FF1A",
-          borderTopWidth: 1,
-          minHeight: 70,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          bottom: 0,
+          minHeight: 99,
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.home} title="Home" />
+            <TabIcon focused={focused} icon={icons.Home} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="likes"
         options={{
-          title: "Explore",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.search} title="Explore" />
+            <TabIcon focused={focused} icon={icons.Like} />
           ),
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="bag"
         options={{
-          title: "Profile",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.person} title="Profile" />
+            <TabIcon focused={focused} icon={icons.Bag} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="notifications"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon focused={focused} icon={icons.Notification} />
           ),
         }}
       />
