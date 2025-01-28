@@ -46,11 +46,11 @@ const Index = () => {
               <Text className="font-Sora text-[0.75rem] leading-[120%] tracking-[1%] text-[#A2A2A2]">
                 Location
               </Text>
-              <View className="flex flex-row gap-1 items-center">
+              <View className="flex flex-row gap-1 items-center mt-2">
                 <Text className="font-Sora-semibold text-sm text-white leading-[150%] tracking-[0] ">
                   Manhattan, New York
                 </Text>
-                <Image source={icons.Down} />
+                <Image source={icons.Down} style={{ width: 14, height: 14 }} />
               </View>
             </View>
             {/* Search View */}
@@ -58,13 +58,17 @@ const Index = () => {
           </View>
         </View>
         {/*Mid - Bottom part */}
-        <View className="flex flex-1 px-6 mt-6">
+        <View className="flex px-6 mt-6">
           {/* Buy one */}
           <ImageBackground
             source={images.Banner}
+            resizeMode="contain"
             className="flex gap-2 py-[13px] px-6 w-full h-[140px] rounded-[12px] overflow-hidden"
           >
-            <View className="py-1 px-[6px] rounded-[8px] bg-[#ED5151] ">
+            <View
+              style={{ width: 60, height: 26 }}
+              className="py-1 px-[6px] rounded-[8px] bg-[#ED5151]"
+            >
               <Text className="font-Sora-semibold text-white text-sm trackng-0">
                 Promo
               </Text>
@@ -96,14 +100,14 @@ const Index = () => {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            className="flex flex-row gap-4 items-center"
+            className="flex flex-row gap-4 items-center bg-transparent"
           >
             {categories.map((category) => (
               <TouchableOpacity
                 key={category}
                 className={`${
-                  selectedCategory === category ? "bg-primary" : "bg-black-10"
-                } px-2 py-1 border-[6px]`}
+                  selectedCategory === category ? "bg-primary" : "bg-black-100"
+                } px-2 py-1 rounded-[6px]`}
                 onPress={() => setSelectedCategory(category)}
               >
                 <Text

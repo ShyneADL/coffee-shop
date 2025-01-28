@@ -36,7 +36,7 @@ export default function RootLayout() {
           if (!hasSeenOnboarding) {
             router.replace("/onboarding");
           } else {
-            router.replace("/(root)/(tabs)");
+            router.replace("/(tabs)/index");
           }
         }
       } catch (error) {
@@ -54,7 +54,7 @@ export default function RootLayout() {
   return (
     <Stack
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}
     />
   );
