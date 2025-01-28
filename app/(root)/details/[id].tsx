@@ -55,8 +55,19 @@ const Detail: React.FC<DetailProps> = ({
             <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%]">
               {category}
             </Text>
-            <View className="flex flex-row gap-2"></View>
+            <View className="flex flex-row gap-2">
+              <Image
+                source={images.Star}
+                resizeMode="contain"
+                className="w-5 h-5"
+              />
+              <Text className="font-Sora-semibold text-[1rem] text-black">
+                {rating}
+                <Text className="font-Sora text-[0.75rem] text-lightGrey"></Text>
+              </Text>
+            </View>
           </View>
+          <View className="flex flex-row items-center gap-3"></View>
         </View>
       </ScrollView>
     </SafeAreaView>

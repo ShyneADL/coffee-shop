@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import { Stack } from "expo-router";
+// app/_layout.js
+import { useEffect, useState } from "react";
+import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import "./global.css";
 
 export default function RootLayout() {
@@ -17,15 +18,44 @@ export default function RootLayout() {
     "Sora-ExtraBold": require("../assets/fonts/Sora-ExtraBold.ttf"),
   });
 
+  const router = useRouter();
+
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
+    SplashScreen.preventAutoHideAsync();
+  }, []);
+
+  useEffect(() => {
+    async function checkFirstLaunch() {
+      try {
+        const hasSeenOnboarding = await AsyncStorage.getItem(
+          "hasSeenOnboarding"
+        );
+
+        if (fontsLoaded) {
+          await SplashScreen.hideAsync();
+          if (!hasSeenOnboarding) {
+            router.replace("/onboarding");
+          } else {
+            router.replace("/(root)/(tabs)");
+          }
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
+
+    checkFirstLaunch();
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return null;
   }
 
-  return <Stack screenOptions={{ headerShown: true }} />;
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: true,
+      }}
+    />
+  );
 }

@@ -71,16 +71,22 @@ const Index = () => {
             </View>
             <View className="w-[203px]">
               <Text
-                className="relative inline-block font-Sora-semibold text-[2rem] text-white py-[0.1em] 
-             before:absolute before:w-full before:h-full 
-             before:bg-black before:top-[9px] before:left-0 before:-z-1"
+                style={{
+                  fontFamily: "Sora-Semibold",
+                  fontSize: 32,
+                  color: "white",
+                  paddingVertical: 4,
+                }}
               >
                 Buy one get
               </Text>
               <Text
-                className="relative inline-block font-Sora-semibold text-[2rem] text-white py-[0.1em] 
-             before:absolute before:w-full before:h-full 
-             before:bg-black before:top-[9px] before:left-0 before:-z-1"
+                style={{
+                  fontFamily: "Sora-Semibold",
+                  fontSize: 32,
+                  color: "white",
+                  paddingVertical: 4,
+                }}
               >
                 one FREE
               </Text>
@@ -113,17 +119,18 @@ const Index = () => {
             ))}
           </ScrollView>
           {/* Coffee cards */}
-          <View className="flex flex-row flex-wrap gap-x-[15px] gap-y-[24px] w-full"></View>
-          {filteredCoffees.map((coffee) => (
-            <CoffeeCard
-              key={coffee.id}
-              image={coffee.image}
-              title={coffee.name}
-              category={coffee.category}
-              price={coffee.price}
-              rating={coffee.rating}
-            />
-          ))}
+          <View className="flex flex-row flex-wrap gap-x-[15px] gap-y-[24px] w-full">
+            {filteredCoffees.map((coffee) => (
+              <CoffeeCard
+                key={coffee.id}
+                image={coffee.image}
+                title={coffee.name}
+                category={coffee.category}
+                price={coffee.price}
+                rating={coffee.rating}
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
