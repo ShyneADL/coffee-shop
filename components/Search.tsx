@@ -20,14 +20,18 @@ const Search = () => {
   };
 
   return (
-    <View className="flex flex-row items-center justify-between gap-4 w-full px-4 rounded-lg bg-accent-100 border border-primary-100 mt-5 py-2">
-      <View className="flex-1 bg-[#2A2A2A] rounded-[12px] flex flex-row items-center justify-start p-4 z-50">
+    <View
+      style={{ width: "100%" }}
+      className="flex flex-row items-center justify-between gap-4 w-full mt-5 py-2"
+    >
+      <View className="flex-1 bg-[#2A2A2A] rounded-[12px] flex flex-row gap-2 items-center justify-start p-4 z-50">
         <Image source={icons.Search} className="size-5" />
         <TextInput
           value={search}
           onChangeText={handleSearch}
           placeholder="Search coffee"
-          className="text-sm font-rubik rounded-[12px] placeholder-shown:text-[#A2A2A2]  leading-[120%] text-white flex-1"
+          placeholderTextColor="#ACACAC"
+          className="text-sm font-Sora rounded-[12px] leading-[120%] text-white flex-1 outline-none"
         />
       </View>
 

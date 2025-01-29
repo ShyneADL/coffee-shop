@@ -65,6 +65,7 @@ export default function RootLayout() {
     >
       <Stack.Screen name="onboarding" />
       <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="details/[id]" />
     </Stack>
   );
 }

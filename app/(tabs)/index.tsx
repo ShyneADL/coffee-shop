@@ -7,12 +7,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { coffees } from "@/constants/coffee";
 import Search from "@/components/Search";
 import CoffeeCard from "@/components/CoffeeCard";
+
+type AppRoutes = "/" | "/details/[id]";
 
 const Index = () => {
   const categories = [
@@ -33,7 +36,7 @@ const Index = () => {
 
   return (
     <SafeAreaView className="bg-[#F9F9F9] flex flex-1">
-      <ScrollView className="relative h-full flex flex-1 bg-[#F9F9F9]">
+      <ScrollView className="relative h-full flex flex-1 bg-[#F9F9F9] pb-[128px]">
         {/* Top part */}
         <View className="w-full">
           <View className="absolute w-full h-[280px] top-0 bg-gradient-to-br from-[#111111] to-[#313131]"></View>
@@ -152,6 +155,7 @@ const Index = () => {
             contentContainerStyle={{
               flexDirection: "row",
               flexWrap: "wrap",
+              justifyContent: "space-between",
               gap: 15, // Horizontal gap
               rowGap: 24, // Vertical gap
               paddingTop: 16, // mt-4 equivalent (4 * 4 = 16)
@@ -160,14 +164,23 @@ const Index = () => {
             showsVerticalScrollIndicator={false}
           >
             {filteredCoffees.map((coffee) => (
-              <CoffeeCard
+              <TouchableOpacity
                 key={coffee.id}
-                image={coffee.image}
-                title={coffee.name}
-                category={coffee.category}
-                price={coffee.price}
-                rating={coffee.rating}
-              />
+                onPress={() =>
+                  router.push({
+                    pathname: `/details/${coffee.id}` as AppRoutes, // Dynamic route with `id`
+                    params: { ...coffee }, // Pass the rest of the coffee data as params
+                  })
+                }
+              >
+                <CoffeeCard
+                  image={coffee.image}
+                  title={coffee.name}
+                  category={coffee.category}
+                  price={coffee.price}
+                  rating={coffee.rating}
+                />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

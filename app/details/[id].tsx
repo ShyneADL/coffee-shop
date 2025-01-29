@@ -5,24 +5,18 @@ import images from "@/constants/images";
 import icons from "@/constants/icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-interface DetailProps {
-  title: string;
-  image: number;
-  category: string;
-  rating: number;
-  description: string;
-  price: number;
-}
+const Detail = () => {
+  // Extract the `id` and other parameters
+  const { id, ...params } = useLocalSearchParams<{
+    id: string;
+    title: string;
+    image: number;
+    category: string;
+    rating: number;
+    description: string;
+    price: number;
+  }>();
 
-const Detail: React.FC<DetailProps> = ({
-  title,
-  category,
-  rating,
-  description,
-  price,
-  image,
-}) => {
-  const { id } = useLocalSearchParams<{ id?: string }>();
   return (
     <SafeAreaView className="h-full bg-[#F9F9F9]">
       <ScrollView className="px-6 py-6">
@@ -46,14 +40,22 @@ const Detail: React.FC<DetailProps> = ({
             />
           </TouchableOpacity>
         </View>
-        <Image source={image} resizeMode="cover" className="w-full h-[202px]" />
+
+        {/* Coffee Image */}
+        <Image
+          source={params.image ? params.image : images.Coffee5} // Fallback image
+          resizeMode="cover"
+          className="w-full h-[202px]"
+        />
+
+        {/* Coffee Details */}
         <View className="flex flex-row items-center justify-between">
           <View>
             <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
-              {title}
+              {params.title || "Coffee Title"}
             </Text>
             <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%]">
-              {category}
+              {params.category || "Coffee Category"}
             </Text>
             <View className="flex flex-row gap-2">
               <Image
@@ -62,13 +64,23 @@ const Detail: React.FC<DetailProps> = ({
                 className="w-5 h-5"
               />
               <Text className="font-Sora-semibold text-[1rem] text-black">
-                {rating}
+                {params.rating || "0"}
                 <Text className="font-Sora text-[0.75rem] text-lightGrey"></Text>
               </Text>
             </View>
           </View>
           <View className="flex flex-row items-center gap-3"></View>
         </View>
+
+        {/* Coffee Description */}
+        <Text className="text-black font-Sora text-[0.875rem] leading-[150%] mt-4">
+          {params.description || "No description available."}
+        </Text>
+
+        {/* Coffee Price */}
+        <Text className="text-black font-Sora-semibold text-[1.25rem] leading-[150%] mt-4">
+          ${params.price || "0.00"}
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
