@@ -9,7 +9,7 @@ const Detail = () => {
   // Extract the `id` and other parameters
   const { id, ...params } = useLocalSearchParams<{
     id: string;
-    title: string;
+    name: string;
     image: number;
     category: string;
     rating: number;
@@ -21,7 +21,7 @@ const Detail = () => {
     <SafeAreaView className="h-full bg-[#F9F9F9]">
       <ScrollView className="px-6 py-6">
         {/* Top part */}
-        <View className="flex flex-1 justify-between items-center">
+        <View className="flex flex-row flex-1 justify-between items-center">
           <TouchableOpacity className="p-[10px]" onPress={() => router.back()}>
             <Image
               source={icons.Left}
@@ -45,14 +45,14 @@ const Detail = () => {
         <Image
           source={params.image ? params.image : images.Coffee5} // Fallback image
           resizeMode="cover"
-          className="w-full h-[202px]"
+          style={{ width: "100%", height: 202 }}
         />
 
         {/* Coffee Details */}
         <View className="flex flex-row items-center justify-between">
           <View>
             <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
-              {params.title || "Coffee Title"}
+              {params.name || "Coffee Title"}
             </Text>
             <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%]">
               {params.category || "Coffee Category"}

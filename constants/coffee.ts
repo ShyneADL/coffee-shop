@@ -5,7 +5,7 @@ export const coffees = [
     id: 0,
     name: "Caffe Mocha",
     price: 4.53,
-    image: images.Coffee1,
+    image: images.Coffee2,
     category: "Mocha",
     rating: 4.5,
     description:
@@ -15,7 +15,7 @@ export const coffees = [
     id: 1,
     name: "Flat White",
     price: 3.53,
-    image: images.Coffee2,
+    image: images.Coffee3,
     category: "Espresso",
     rating: 4.2,
     description:
@@ -25,7 +25,7 @@ export const coffees = [
     id: 2,
     name: "Mocha Fusi",
     price: 7.53,
-    image: images.Coffee3,
+    image: images.Coffee5,
     category: "Mocha",
     rating: 4.3,
     description:
@@ -56,7 +56,7 @@ export const coffees = [
     id: 5,
     name: "Americano Classic",
     price: 3.25,
-    image: images.Coffee5,
+    image: images.Coffee1,
     category: "Americano",
     rating: 4.1,
     description:

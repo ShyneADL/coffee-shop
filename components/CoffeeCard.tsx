@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Image,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import React from "react";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -25,12 +18,9 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
   price,
   rating,
 }) => {
-  const screenWidth = Dimensions.get("window").width;
-  console.log(screenWidth);
-  const cardWidth = (screenWidth - 64) / 2;
   return (
     <View
-      style={{ width: cardWidth }}
+      style={{ width: 156 }}
       className="flex gap-2 bg-white px-2 pt-2 pb-3 overflow-hidden rounded-[16px]"
     >
       {/* Image */}

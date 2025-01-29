@@ -166,12 +166,20 @@ const Index = () => {
             {filteredCoffees.map((coffee) => (
               <TouchableOpacity
                 key={coffee.id}
-                onPress={() =>
+                onPress={() => {
                   router.push({
-                    pathname: `/details/${coffee.id}` as AppRoutes, // Dynamic route with `id`
-                    params: { ...coffee }, // Pass the rest of the coffee data as params
-                  })
-                }
+                    pathname: `/details/${coffee.id}` as AppRoutes,
+                    params: {
+                      id: coffee.id,
+                      name: coffee.name,
+                      image: coffee.image,
+                      category: coffee.category,
+                      rating: coffee.rating,
+                      description: coffee.description,
+                      price: coffee.price,
+                    },
+                  });
+                }}
               >
                 <CoffeeCard
                   image={coffee.image}
