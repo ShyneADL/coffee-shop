@@ -16,7 +16,7 @@ import CoffeeCard from "@/components/CoffeeCard";
 
 const Index = () => {
   const categories = [
-    "All Categories",
+    "All Coffee",
     "Macchiato",
     "Latte",
     "Americano",
@@ -25,16 +25,15 @@ const Index = () => {
     "Cold Brew",
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [selectedCategory, setSelectedCategory] = useState("All Coffee");
   const filteredCoffees = coffees.filter(
     (coffee) =>
-      selectedCategory === "All Categories" ||
-      coffee.category === selectedCategory
+      selectedCategory === "All Coffee" || coffee.category === selectedCategory
   );
 
   return (
-    <SafeAreaView>
-      <ScrollView className="relative h-full bg-[#F9F9F9]">
+    <SafeAreaView className="bg-[#F9F9F9] flex flex-1">
+      <ScrollView className="relative h-full flex flex-1 bg-[#F9F9F9]">
         {/* Top part */}
         <View className="w-full">
           <View className="absolute w-full h-[280px] top-0 bg-gradient-to-br from-[#111111] to-[#313131]"></View>
@@ -62,8 +61,17 @@ const Index = () => {
           {/* Buy one */}
           <ImageBackground
             source={images.Banner}
-            resizeMode="contain"
-            className="flex gap-2 py-[13px] px-6 w-full h-[140px] rounded-[12px] overflow-hidden"
+            resizeMode="cover"
+            style={{
+              width: "100%", // Full width of the parent container
+              height: 140, // Fixed height
+              justifyContent: "flex-start", // Align content to the top
+              alignItems: "flex-start", // Align content to the left
+              overflow: "hidden", // Hide overflow
+              borderRadius: 12, // Rounded corners
+              paddingVertical: 13, // Vertical padding
+              paddingHorizontal: 24, // Horizontal padding
+            }}
           >
             <View
               style={{ width: 60, height: 26 }}
@@ -74,40 +82,57 @@ const Index = () => {
               </Text>
             </View>
             <View className="w-[203px]">
-              <Text
-                style={{
-                  fontFamily: "Sora-Semibold",
-                  fontSize: 32,
-                  color: "white",
-                  paddingVertical: 4,
-                }}
-              >
-                Buy one get
-              </Text>
-              <Text
-                style={{
-                  fontFamily: "Sora-Semibold",
-                  fontSize: 32,
-                  color: "white",
-                  paddingVertical: 4,
-                }}
-              >
-                one FREE
-              </Text>
+              <View style={{ position: "relative" }}>
+                <Text
+                  style={{
+                    fontFamily: "Sora-Semibold",
+                    fontSize: 32,
+                    color: "white",
+                    paddingVertical: 4,
+                    zIndex: 2,
+                  }}
+                >
+                  Buy one get
+                </Text>
+                <View
+                  style={{ width: 200, height: 27, zIndex: 1 }}
+                  className="absolute top-[19px] left-[-1px]  bg-black"
+                ></View>
+              </View>
+              <View style={{ position: "relative" }}>
+                <Text
+                  style={{
+                    fontFamily: "Sora-Semibold",
+                    fontSize: 32,
+                    color: "white",
+                    paddingVertical: 4,
+                    zIndex: 2,
+                  }}
+                >
+                  one FREE
+                </Text>
+                <View
+                  style={{ width: 149, height: 23, zIndex: 1 }}
+                  className="absolute top-[19px] left-[-1px]  bg-black"
+                ></View>
+              </View>
             </View>
           </ImageBackground>
           {/* Coffee list */}
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            className="flex flex-row gap-4 items-center bg-transparent"
+            style={{ gap: "1rem" }}
+            className="flex flex-row gap-4 items-center mt-4"
           >
             {categories.map((category) => (
               <TouchableOpacity
                 key={category}
                 className={`${
-                  selectedCategory === category ? "bg-primary" : "bg-black-100"
-                } px-2 py-1 rounded-[6px]`}
+                  selectedCategory === category
+                    ? "bg-primary"
+                    : "bg-category-bg"
+                } px-2 py-1 rounded-[6px] mr-4`}
                 onPress={() => setSelectedCategory(category)}
               >
                 <Text
@@ -123,8 +148,18 @@ const Index = () => {
             ))}
           </ScrollView>
           {/* Coffee cards */}
-          <View className="flex flex-row flex-wrap gap-x-[15px] gap-y-[24px] w-full">
-            {/* {filteredCoffees.map((coffee) => (
+          <ScrollView
+            contentContainerStyle={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: 15, // Horizontal gap
+              rowGap: 24, // Vertical gap
+              paddingTop: 16, // mt-4 equivalent (4 * 4 = 16)
+              width: "100%",
+            }}
+            showsVerticalScrollIndicator={false}
+          >
+            {filteredCoffees.map((coffee) => (
               <CoffeeCard
                 key={coffee.id}
                 image={coffee.image}
@@ -133,8 +168,8 @@ const Index = () => {
                 price={coffee.price}
                 rating={coffee.rating}
               />
-            ))} */}
-          </View>
+            ))}
+          </ScrollView>
         </View>
       </ScrollView>
     </SafeAreaView>

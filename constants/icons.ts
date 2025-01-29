@@ -12,9 +12,11 @@ import Notification from "../assets/icons/notification.svg";
 import Options from "../assets/icons/options.svg";
 import Phone from "../assets/icons/phone.svg";
 import Star from "../assets/icons/star.svg";
+import Add from "../assets/icons/add.svg";
 
 export default {
   Bag,
+  Add,
   Home,
   Discount,
   Filter,

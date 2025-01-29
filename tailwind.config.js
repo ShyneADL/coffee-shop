@@ -28,6 +28,7 @@ module.exports = {
         lightGrey: "#A2A2A2",
         offWhite: "#F9F9F9",
         danger: "#F75555",
+        "category-bg": "hsla(0, 0%, 93%, 0.35)",
       },
     },
   },
