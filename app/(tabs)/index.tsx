@@ -124,7 +124,7 @@ const Index = () => {
           </ScrollView>
           {/* Coffee cards */}
           <View className="flex flex-row flex-wrap gap-x-[15px] gap-y-[24px] w-full">
-            {filteredCoffees.map((coffee) => (
+            {/* {filteredCoffees.map((coffee) => (
               <CoffeeCard
                 key={coffee.id}
                 image={coffee.image}
@@ -133,7 +133,7 @@ const Index = () => {
                 price={coffee.price}
                 rating={coffee.rating}
               />
-            ))}
+            ))} */}
           </View>
         </View>
       </ScrollView>
