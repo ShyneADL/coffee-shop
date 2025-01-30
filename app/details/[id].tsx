@@ -174,10 +174,23 @@ const Detail = () => {
         </View>
       </ScrollView>
       {/* Coffee Price */}
-      <View style={{ height: 84 }} className="bg-white pt-4 px-6 pb-[46px]">
-        <Text className="text-primary font-Sora-semibold text-[1.25rem] leading-[150%] mt-4">
-          $ {currentPrice.toFixed(2)}
-        </Text>
+      <View
+        style={{ height: 84 }}
+        className="flex flex-1 flex-row items-center justify-between bg-white pt-4 px-6 pb-[46px]"
+      >
+        <View>
+          <Text className="font-Sora text-[#909090] text-sm leading-[120%] tracking-[0]">
+            Price
+          </Text>
+          <Text className="text-primary font-Sora-semibold text-[1.25rem] leading-[150%] mt-1">
+            $ {currentPrice.toFixed(2)}
+          </Text>
+        </View>
+        <TouchableOpacity className="px-4 py-5 rounded-[16px] bg-primary">
+          <Text className="text-white text-base font-Sora-semibold leading-[150%] tracking-0">
+            Buy Now
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
