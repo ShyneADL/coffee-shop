@@ -41,7 +41,7 @@ const Order = () => {
           </Text>
           <Text className="text-primary font-Sora-semibold text-[1.25rem] leading-[150%] mt-1"></Text>
         </View>
-        <TouchableOpacity className="px-4 py-5 rounded-[16px] bg-primary">
+        <TouchableOpacity className="flex flex-1 px-4 py-5 rounded-[16px] bg-primary">
           <Text className="text-white text-base font-Sora-semibold leading-[150%] tracking-0">
             Buy Now
           </Text>

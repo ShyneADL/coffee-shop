@@ -33,8 +33,8 @@ const Detail = () => {
   const currentPrice = calculatePrice();
 
   return (
-    <SafeAreaView className="h-full bg-[#F9F9F9]">
-      <ScrollView className="px-6 py-6">
+    <SafeAreaView className="relative flex flex-1 bg-[#F9F9F9]">
+      <ScrollView className="flex flex-1 px-6 py-8 pb-[100px]">
         {/* Top part */}
         <View className="flex flex-row flex-1 justify-between items-center">
           <TouchableOpacity className="p-[10px]" onPress={() => router.back()}>
@@ -58,13 +58,18 @@ const Detail = () => {
 
         {/* Coffee Image */}
         <Image
-          source={params.image ? params.image : images.Coffee5} // Fallback image
+          source={require("../../assets/images/coffee-details.png")} // Fallback image
           resizeMode="cover"
-          style={{ width: "100%", height: 202 }}
+          style={{
+            width: "100%",
+            height: 202,
+            aspectRatio: "8:5",
+          }}
+          className="mt-8 rounded-[16px]"
         />
 
         {/* Coffee Details */}
-        <View className="flex flex-row items-center justify-between">
+        <View className="flex flex-row items-center justify-between mt-4">
           <View>
             <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
               {params.name || "Coffee Title"}
@@ -121,9 +126,9 @@ const Detail = () => {
           <Text className="font-Sora-semibold text-[1rem] text-black leading-[150%] trracking-[0%]">
             Size
           </Text>
-          <View className="flex flex-row flex-1 items-center justify-between">
+          <View className="flex flex-row items-center justify-between overflow-hidden gap-4 mt-4">
             <TouchableOpacity
-              className={`px-[43px] py-[10px] rounded-[12px] flex items-center justify-center border ${
+              className={` py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
                 activeSize === "S"
                   ? "bg-primary-100 border-primary"
                   : "bg-white border-[#E3E3E3]"
@@ -139,7 +144,7 @@ const Detail = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={`px-[43px] py-[10px] rounded-[12px] flex items-center justify-center border ${
+              className={` py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
                 activeSize === "M"
                   ? "bg-primary-100 border-primary"
                   : "bg-white border-[#E3E3E3]"
@@ -155,7 +160,7 @@ const Detail = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={`px-[43px] py-[10px] rounded-[12px] flex items-center justify-center border ${
+              className={`py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
                 activeSize === "L"
                   ? "bg-primary-100 border-primary"
                   : "bg-white border-[#E3E3E3]"
@@ -175,10 +180,10 @@ const Detail = () => {
       </ScrollView>
       {/* Coffee Price */}
       <View
-        style={{ height: 84 }}
-        className="flex flex-1 flex-row items-center justify-between bg-white pt-4 px-6 pb-[46px]"
+        style={{ height: 84, width: "100%" }}
+        className="fixed bottom-0 z-20 flex rounded-t-[16px] gap-[34px] flex-row items-center justify-between bg-white pt-4 px-6 pb-[46px]"
       >
-        <View>
+        <View className="mt-6">
           <Text className="font-Sora text-[#909090] text-sm leading-[120%] tracking-[0]">
             Price
           </Text>
@@ -186,8 +191,11 @@ const Detail = () => {
             $ {currentPrice.toFixed(2)}
           </Text>
         </View>
-        <TouchableOpacity className="px-4 py-5 rounded-[16px] bg-primary">
-          <Text className="text-white text-base font-Sora-semibold leading-[150%] tracking-0">
+        <TouchableOpacity className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary">
+          <Text
+            style={{ width: 73 }}
+            className="text-white text-base font-Sora-semibold leading-[150%] tracking-0"
+          >
             Buy Now
           </Text>
         </TouchableOpacity>
