@@ -191,7 +191,12 @@ const Detail = () => {
             $ {currentPrice.toFixed(2)}
           </Text>
         </View>
-        <TouchableOpacity className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary">
+        <TouchableOpacity
+          className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
+          onPress={() => {
+            router.push("/(order)/order");
+          }}
+        >
           <Text
             style={{ width: 73 }}
             className="text-white text-base font-Sora-semibold leading-[150%] tracking-0"

@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const Order = () => {
   return (
     <SafeAreaView className="h-full bg-[#F9F9F9]">
-      <ScrollView className="px-6 py-6">
+      <ScrollView className="px-6 py-8">
         {/* Top part */}
         <View className="flex flex-row flex-1 justify-between items-center">
           <TouchableOpacity className="p-[10px]" onPress={() => router.back()}>
@@ -19,7 +19,7 @@ const Order = () => {
             />
           </TouchableOpacity>
           <Text className="text-black font-Sora-semibold text-[1rem] leading-[120%] tracking-[0%]">
-            Orders
+            Order
           </Text>
           <TouchableOpacity className="p-[10px]">
             <Image
@@ -29,6 +29,8 @@ const Order = () => {
             />
           </TouchableOpacity>
         </View>
+        <Deliver />
+        <PickUp />
       </ScrollView>
       {/* Coffee Price */}
       <View
@@ -49,6 +51,13 @@ const Order = () => {
       </View>
     </SafeAreaView>
   );
+};
+
+const Deliver = () => {
+  return <View>Deliver</View>;
+};
+const PickUp = () => {
+  return <View>Pickup</View>;
 };
 
 export default Order;
