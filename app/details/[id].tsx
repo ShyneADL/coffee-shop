@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -16,6 +16,21 @@ const Detail = () => {
     description: string;
     price: number;
   }>();
+
+  const [activeSize, setActiveSize] = useState("M");
+  const calculatePrice = () => {
+    const basePrice = Number(params.price);
+
+    if (activeSize === "S") {
+      return basePrice - 1.0;
+    } else if (activeSize === "L") {
+      return basePrice + 2.0;
+    } else {
+      return basePrice;
+    }
+  };
+
+  const currentPrice = calculatePrice();
 
   return (
     <SafeAreaView className="h-full bg-[#F9F9F9]">
@@ -54,34 +69,116 @@ const Detail = () => {
             <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
               {params.name || "Coffee Title"}
             </Text>
-            <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%]">
+            <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%] mt-1">
               {params.category || "Coffee Category"}
             </Text>
-            <View className="flex flex-row gap-2">
+            <View className="flex flex-row gap-1 mt-4">
               <Image
                 source={images.Star}
                 resizeMode="contain"
-                className="w-5 h-5"
+                style={{ width: 20, height: 20 }}
+                className="size-5"
               />
               <Text className="font-Sora-semibold text-[1rem] text-black">
                 {params.rating || "0"}
-                <Text className="font-Sora text-[0.75rem] text-lightGrey"></Text>
+                <Text className="font-Sora text-[0.75rem] text-lightGrey ml-[4px]">
+                  (230)
+                </Text>
               </Text>
             </View>
           </View>
-          <View className="flex flex-row items-center gap-3"></View>
+          <View className="flex flex-row items-center gap-3">
+            <View className="bg-alt-grey rounded-[12px] p-[10px]">
+              <Image source={images.Bike} style={{ width: 24, height: 24 }} />
+            </View>
+            <View className="bg-alt-grey rounded-[12px] p-[10px]">
+              <Image source={images.Bean} style={{ width: 24, height: 24 }} />
+            </View>
+            <View className="bg-alt-grey rounded-[12px] p-[10px]">
+              <Image source={images.Milk} style={{ width: 24, height: 24 }} />
+            </View>
+          </View>
+        </View>
+
+        {/* Divider */}
+
+        <View className="flex flex-1 items-center justify-center mt-4">
+          <View style={{ width: "90%", height: 1 }} className="bg-[#E3E3E3]" />
         </View>
 
         {/* Coffee Description */}
-        <Text className="text-black font-Sora text-[0.875rem] leading-[150%] mt-4">
-          {params.description || "No description available."}
-        </Text>
+        <View className="mt-4">
+          <Text className="font-Sora-semibold text-[1rem] text-black leading-[150%] trracking-[0%]">
+            Description
+          </Text>
+          <Text className="text-lightGrey font-Sora-light text-[0.875rem] leading-[150%] mt-2">
+            {params.description || "No description available."}
+          </Text>
+        </View>
 
-        {/* Coffee Price */}
-        <Text className="text-black font-Sora-semibold text-[1.25rem] leading-[150%] mt-4">
-          ${params.price || "0.00"}
-        </Text>
+        {/* Coffee Size */}
+        <View className="mt-6">
+          <Text className="font-Sora-semibold text-[1rem] text-black leading-[150%] trracking-[0%]">
+            Size
+          </Text>
+          <View className="flex flex-row flex-1 items-center justify-between">
+            <TouchableOpacity
+              className={`px-[43px] py-[10px] rounded-[12px] flex items-center justify-center border ${
+                activeSize === "S"
+                  ? "bg-primary-100 border-primary"
+                  : "bg-white border-[#E3E3E3]"
+              }`}
+              onPress={() => setActiveSize("S")}
+            >
+              <Text
+                className={`font-Sora text-sm leading-[150%] ${
+                  activeSize === "S" ? "text-primary" : "text-black"
+                }`}
+              >
+                S
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className={`px-[43px] py-[10px] rounded-[12px] flex items-center justify-center border ${
+                activeSize === "M"
+                  ? "bg-primary-100 border-primary"
+                  : "bg-white border-[#E3E3E3]"
+              }`}
+              onPress={() => setActiveSize("M")}
+            >
+              <Text
+                className={`font-Sora text-sm leading-[150%] ${
+                  activeSize === "M" ? "text-primary" : "text-black"
+                }`}
+              >
+                M
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className={`px-[43px] py-[10px] rounded-[12px] flex items-center justify-center border ${
+                activeSize === "L"
+                  ? "bg-primary-100 border-primary"
+                  : "bg-white border-[#E3E3E3]"
+              }`}
+              onPress={() => setActiveSize("L")}
+            >
+              <Text
+                className={`font-Sora text-sm leading-[150%] ${
+                  activeSize === "L" ? "text-primary" : "text-black"
+                }`}
+              >
+                L
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </ScrollView>
+      {/* Coffee Price */}
+      <View style={{ height: 84 }} className="bg-white pt-4 px-6 pb-[46px]">
+        <Text className="text-primary font-Sora-semibold text-[1.25rem] leading-[150%] mt-4">
+          $ {currentPrice.toFixed(2)}
+        </Text>
+      </View>
     </SafeAreaView>
   );
 };

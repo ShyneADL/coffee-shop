@@ -132,9 +132,7 @@ const Index = () => {
               <TouchableOpacity
                 key={category}
                 className={`${
-                  selectedCategory === category
-                    ? "bg-primary"
-                    : "bg-category-bg"
+                  selectedCategory === category ? "bg-primary" : "bg-alt-grey"
                 } px-2 py-1 rounded-[6px] mr-4`}
                 onPress={() => setSelectedCategory(category)}
               >
