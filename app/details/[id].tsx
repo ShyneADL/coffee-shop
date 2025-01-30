@@ -180,7 +180,7 @@ const Detail = () => {
       </ScrollView>
       {/* Coffee Price */}
       <View
-        style={{ height: 84, width: "100%" }}
+        style={{ minHeight: 84, width: "100%" }}
         className="fixed bottom-0 z-20 flex rounded-t-[16px] gap-[34px] flex-row items-center justify-between bg-white pt-4 px-6 pb-[46px]"
       >
         <View className="mt-6">

@@ -145,29 +145,53 @@ const Order = () => {
       </ScrollView>
 
       {/* Coffee Price */}
-      {/* <View
-        style={{ height: 84 }}
-        className="flex flex-1 flex-row items-center justify-between bg-white pt-4 px-6 pb-[46px]"
+      <View
+        style={{ minHeight: 119, width: "100%" }}
+        className="fixed bottom-0 z-20 flex rounded-t-[16px] items-center justify-between bg-white py-4 px-6"
       >
-        <View>
-          <Text className="font-Sora text-[#909090] text-sm leading-[120%] tracking-[0]">
-            Price
-          </Text>
-          <Text className="text-primary font-Sora-semibold text-[1.25rem] leading-[150%] mt-1"></Text>
+        <View
+          style={{ width: "100%" }}
+          className="flex flex-row items-center justify-between"
+        >
+          <View className="flex flex-row gap-4 items-center">
+            <Image source={icons.Wallet} style={{ width: 20, height: 20 }} />
+            <View>
+              <Text className="text-sm font-Sora-semibold text-black leading-[120%]">
+                Cash/Wallet
+              </Text>
+              <Text className="text-xs font-Sora-semibold text-primary leading-[150%]">
+                $5.53
+              </Text>
+            </View>
+          </View>
+          <Image
+            source={icons.Down}
+            resizeMode="contain"
+            style={{ width: 20, height: 20 }}
+          />
         </View>
-        <TouchableOpacity className="flex flex-1 px-4 py-5 rounded-[16px] bg-primary">
-          <Text className="text-white text-base font-Sora-semibold leading-[150%] tracking-0">
-            Buy Now
+        <TouchableOpacity
+          style={{ width: "100%" }}
+          className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
+          onPress={() => {
+            router.push("/(order)/delivery");
+          }}
+        >
+          <Text
+            style={{ width: 73 }}
+            className="text-white text-base font-Sora-semibold leading-[150%] tracking-0"
+          >
+            Order
           </Text>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </SafeAreaView>
   );
 };
 
 const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
   return (
-    <View className="flex flex-1">
+    <View className="flex flex-1 pb-[100px]">
       {/* Top part */}
       <View className="mt-6">
         <Text className="text-base font-Sora-semibold leading-[150%] tracking-0 text-black">
@@ -245,6 +269,57 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           >
             <Image source={images.Plus} style={{ width: 24, height: 24 }} />
           </TouchableOpacity>
+        </View>
+      </View>
+      {/* Brown Line */}
+      <View className="flex flex-1 mt-4" />
+
+      {/* Payment Section */}
+      <View>
+        <View className="mt-4 px-4 py-[18px] flex flex-row items-center justify-between bg-white rounded-[16px] border border-[#EDEDED]">
+          <View className="flex flex-row gap-4 items-center">
+            <Image
+              source={icons.Discount}
+              resizeMode="contain"
+              style={{ width: 20, height: 20 }}
+            />
+            <Text className="text-black text-sm font-Sora-semibold leading-[150%] tracking-0">
+              1 Discount is Applied
+            </Text>
+          </View>
+          <Image
+            source={icons.Right}
+            resizeMode="contain"
+            style={{ width: 20, height: 20 }}
+          />
+        </View>
+        {/* Payment Summary */}
+        <View>
+          <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
+            Payment Summary
+          </Text>
+
+          <View className="flex flex-row items-center justify-between mt-4">
+            <Text className="text-sm font-Sora text-black leading-[150%] tracking-0">
+              Price
+            </Text>
+            <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
+              $ 4.53
+            </Text>
+          </View>
+          <View className="flex flex-row items-center justify-between mt-2">
+            <Text className="text-sm font-Sora text-black leading-[150%] tracking-0">
+              Delivery Fee
+            </Text>
+            <View className="flex flex-row items-center gap-2">
+              <Text className="text-sm font-Sora-semibold text-black leading-[150%] line-through tracking-0">
+                $ 2.0
+              </Text>
+              <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
+                $1.0
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>

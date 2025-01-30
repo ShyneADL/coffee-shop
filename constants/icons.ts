@@ -15,9 +15,11 @@ import Star from "../assets/icons/star.svg";
 import Add from "../assets/icons/add.svg";
 import Edit from "../assets/icons/edit.svg";
 import Note from "../assets/icons/note.svg";
+import Wallet from "../assets/icons/wallet.svg";
 
 export default {
   Bag,
+  Wallet,
   Add,
   Home,
   Discount,
