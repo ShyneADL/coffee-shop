@@ -45,10 +45,10 @@ const Order = () => {
     ]).start();
   }, [method]);
   return (
-    <SafeAreaView className="flex flex-1 h-full bg-[#F9F9F9]">
+    <SafeAreaView className="flex flex-1 bg-[#F9F9F9]">
       <ScrollView className="flex flex-1 px-6 py-8 pb-[100px]">
         {/* Top part */}
-        <View className="flex flex-row flex-1 justify-between items-center">
+        <View className="flex flex-row justify-between items-center">
           <TouchableOpacity className="p-[10px]" onPress={() => router.back()}>
             <Image
               source={icons.Left}
@@ -69,7 +69,7 @@ const Order = () => {
         </View>
 
         {/* Slider */}
-        <View className="flex flex-1 p-1 bg-[#EDEDED] rounded-[12px] mt-8">
+        <View className="flex p-1 bg-[#EDEDED] rounded-[12px] mt-8">
           <View className="relative flex flex-1 flex-row items-center justify-between rounded-[12px] gap-1">
             <Pressable
               className="flex-1 px-12 py-2 rounded-[8px] bg-transparent"
@@ -136,11 +136,10 @@ const Order = () => {
           </View>
         </View>
 
-        {/* Conditional Rendering */}
         {method === "Deliver" ? (
           <Deliver count={count} setCount={setCount} />
         ) : (
-          <PickUp />
+          <PickUp count={count} setCount={setCount} />
         )}
       </ScrollView>
 
@@ -178,7 +177,7 @@ const Order = () => {
           }}
         >
           <Text
-            style={{ width: 73 }}
+            style={{ width: 49 }}
             className="text-white text-base font-Sora-semibold leading-[150%] tracking-0"
           >
             Order
@@ -294,7 +293,7 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           />
         </View>
         {/* Payment Summary */}
-        <View>
+        <View className="mt-6">
           <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
             Payment Summary
           </Text>
@@ -326,21 +325,22 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
   );
 };
 
-const PickUp = () => {
+const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
   return (
-    <View className="flex flex-1">
+    <View className="flex flex-1 pb-[100px]">
       {/* Top part */}
       <View className="mt-6">
         <Text className="text-base font-Sora-semibold leading-[150%] tracking-0 text-black">
           Pickup Address
         </Text>
         <Text className="text-sm font-Sora-semibold leading-[150%] tracking-0 text-black mt-4">
-          Uptown, New York
+          Manhattan, New York
         </Text>
         <Text className="text-xs font-Sora leading-[150%] tracking-0 text-lightGrey mt-1">
-          1235 Amsterdam Ave, Apt 4B, New York, NY 10027
+          456 W 37th St, Apt 9C, New York, NY 10018
         </Text>
 
+        {/* Edit Address */}
         <View className="flex flex-row items-center justify-start gap-2 mt-4">
           <View className="flex flex-row items-center gap-1 py-[6px] px-3 bg-white border border-lightGrey rounded-[16px]">
             <Image
@@ -357,6 +357,91 @@ const PickUp = () => {
               style={{ width: 14, height: 14 }}
             />
             <Text>Add Note</Text>
+          </View>
+        </View>
+
+        {/* Divider */}
+        <View className="flex flex-1 items-center justify-center mt-4">
+          <View style={{ width: "90%", height: 1 }} className="bg-[#E3E3E3]" />
+        </View>
+      </View>
+      {/* Middle Part */}
+      <View className="flex flex-row items-center justify-between mt-4">
+        <View className="flex flex-row items-center gap-4">
+          <Image
+            source={images.Coffee4}
+            style={{ width: 54, height: 54, borderRadius: 8 }}
+            resizeMode="cover"
+          />
+          <View>
+            <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
+              Caffe Mocha
+            </Text>
+            <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
+              Deep Foam
+            </Text>
+          </View>
+        </View>
+        <View className="flex flex-row items-center gap-[18px]">
+          <TouchableOpacity
+            onPress={() => {
+              if (count > 1) {
+                setCount(count - 1);
+              }
+            }}
+          >
+            <Image
+              source={count === 1 ? images.MinusFaded : images.Minus}
+              style={{ width: 24, height: 24 }}
+            />
+          </TouchableOpacity>
+          <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
+            {count}
+          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              setCount(count + 1);
+            }}
+          >
+            <Image source={images.Plus} style={{ width: 24, height: 24 }} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      {/* Brown Line */}
+      <View className="flex flex-1 mt-4" />
+
+      {/* Payment Section */}
+      <View>
+        <View className="mt-4 px-4 py-[18px] flex flex-row items-center justify-between bg-white rounded-[16px] border border-[#EDEDED]">
+          <View className="flex flex-row gap-4 items-center">
+            <Image
+              source={icons.Discount}
+              resizeMode="contain"
+              style={{ width: 20, height: 20 }}
+            />
+            <Text className="text-black text-sm font-Sora-semibold leading-[150%] tracking-0">
+              Add a Voucher
+            </Text>
+          </View>
+          <Image
+            source={icons.Right}
+            resizeMode="contain"
+            style={{ width: 20, height: 20 }}
+          />
+        </View>
+        {/* Payment Summary */}
+        <View className="mt-6">
+          <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
+            Payment Summary
+          </Text>
+
+          <View className="flex flex-row items-center justify-between mt-4">
+            <Text className="text-sm font-Sora text-black leading-[150%] tracking-0">
+              Price
+            </Text>
+            <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
+              $ 4.53
+            </Text>
           </View>
         </View>
       </View>
