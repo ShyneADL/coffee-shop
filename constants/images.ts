@@ -5,6 +5,7 @@ import Icon from "../assets/images/icon.png";
 import Library from "../assets/images/library.png";
 import Star from "../assets/images/star.png";
 import Milk from "../assets/images/milk.png";
+import MinusFaded from "../assets/images/minus-circle-faded.png";
 import Minus from "../assets/images/minus-circle.png";
 import Plus from "../assets/images/plus-circle.png";
 import Banner from "../assets/images/banner.png";
@@ -27,6 +28,7 @@ export default {
   Library,
   Star,
   Milk,
+  MinusFaded,
   Minus,
   Plus,
   Banner,
