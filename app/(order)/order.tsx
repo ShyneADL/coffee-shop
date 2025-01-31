@@ -198,7 +198,7 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           Deliver Address
         </Text>
         <Text className="text-sm font-Sora-semibold leading-[150%] tracking-0 text-black mt-4">
-          Uptown, New York
+          Paul M. Valley
         </Text>
         <Text className="text-xs font-Sora leading-[150%] tracking-0 text-lightGrey mt-1">
           1235 Amsterdam Ave, Apt 4B, New York, NY 10027
@@ -335,7 +335,7 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
           Pickup Address
         </Text>
         <Text className="text-sm font-Sora-semibold leading-[150%] tracking-0 text-black mt-4">
-          Manhattan, New York
+          Paul M. Valley
         </Text>
         <Text className="text-xs font-Sora leading-[150%] tracking-0 text-lightGrey mt-1">
           456 W 37th St, Apt 9C, New York, NY 10018

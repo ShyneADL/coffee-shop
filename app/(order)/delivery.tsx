@@ -61,11 +61,11 @@ const Bottom = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = ["21%", "50%"];
 
-  const pulseAnim = useRef(new Animated.Value(0.5)).current;
+  const pulseAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     // Create a continuous pulsing animation
-    Animated.loop(
+    const pulseAnimation = Animated.loop(
       Animated.sequence([
         Animated.timing(pulseAnim, {
           toValue: 1,
@@ -78,7 +78,12 @@ const Bottom = () => {
           useNativeDriver: true,
         }),
       ])
-    ).start();
+    );
+
+    pulseAnimation.start();
+
+    // Cleanup animation on unmount
+    return () => pulseAnimation.stop();
   }, [pulseAnim]);
 
   // callbacks
@@ -138,10 +143,15 @@ const Bottom = () => {
               style={{ height: 4, minWidth: 50 }}
               className="flex flex-1 bg-[#36C07E] rounded-[20px]"
             />
-            <Animated.View
-              style={{ height: 4, minWidth: 50, opacity: pulseAnim }}
-              className="flex flex-1 bg-[#36C07E] rounded-[20px]"
-            />
+            <View
+              style={{ height: 4, minWidth: 50 }}
+              className=" relative flex flex-1 bg-[#E3E3E3] rounded-[20px]"
+            >
+              <View
+                style={{ height: 4, minWidth: 50, opacity: pulseAnim }}
+                className="absolute inset-0 flex flex-1 bg-[#36C07E] rounded-[20px]"
+              />
+            </View>
             <View
               style={{ height: 4, minWidth: 50 }}
               className="flex flex-1 bg-[#E3E3E3] rounded-[20px]"
