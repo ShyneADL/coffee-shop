@@ -9,6 +9,7 @@ import Milk from "../assets/images/milk.png";
 import MinusFaded from "../assets/images/minus-circle-faded.png";
 import Minus from "../assets/images/minus-circle.png";
 import Plus from "../assets/images/plus-circle.png";
+import Man from "../assets/images/man.png";
 import Banner from "../assets/images/banner.png";
 import Coffee1 from "../assets/images/coffee-1.png";
 import Coffee2 from "../assets/images/coffee-2.png";
@@ -23,6 +24,7 @@ import CaramelMacchiato from "../assets/images/caramel-machiato.png";
 
 export default {
   Bean,
+  Man,
   Bike,
   GPS,
   Map,

@@ -79,6 +79,7 @@ const Bottom = () => {
         snapPoints={snapPoints} // Snap points for the sheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
+        style={{ flex: 1 }}
         handleIndicatorStyle={{
           backgroundColor: "#E3E3E3",
           width: 45,
@@ -130,22 +131,29 @@ const Bottom = () => {
           {/* Bottom */}
           <View
             style={{ width: "100%" }}
-            className="flex flex-row items-center justify-between bg-transparent rounded-[12px] border border-[#E3E3E3] px-3 py-[10.5px] mt-4"
+            className="flex flex-row items-center justify-between bg-transparent rounded-[12px] border border-[#E3E3E3] pl-3 py-[10.5px] mt-4"
           >
             <View className="bg-transparent rounded-[12px] border border-[#E3E3E3] p-[6px]">
               <Image source={images.Bike} style={{ width: 44, height: 44 }} />
             </View>
-            <View style={{ width: "100%" }}>
+            <View style={{ width: 243 }}>
               <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0 text-left">
                 Delivered your order
               </Text>
               <Text
-                style={{ width: "100%" }}
+                style={{ width: 243 }}
                 className="font-Sora-light text-xs leading-[150%] text-lightGrey tracking-0 text-left mt-[4px]"
               >
                 We will deliver your goods to you in the shortest possible time.
               </Text>
             </View>
+          </View>
+
+          <View className="flex flex-row items-center">
+            <Image
+              source={images.Man}
+              style={{ width: 44, height: 44, borderRadius: 14 }}
+            />
           </View>
         </BottomSheetView>
       </BottomSheet>
