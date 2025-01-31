@@ -162,7 +162,10 @@ const Index = () => {
             {filteredCoffees.map((coffee) => (
               <Link
                 key={coffee.id}
-                href={{ pathname: "/details/[id]", params: { ...coffee } }}
+                href={{
+                  pathname: "/details/[id]",
+                  params: { ...coffee },
+                }}
               >
                 <CoffeeCard
                   image={coffee.image}

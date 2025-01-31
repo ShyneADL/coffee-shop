@@ -5,7 +5,7 @@ export const coffees = [
     id: 0,
     name: "Caffe Mocha",
     price: 4.53,
-    image: images.Coffee2,
+    image: require("../assets/images/coffee-2.png"),
     category: "Mocha",
     rating: 4.5,
     description:
@@ -15,7 +15,7 @@ export const coffees = [
     id: 1,
     name: "Flat White",
     price: 3.53,
-    image: images.Coffee3,
+    image: require("../assets/images/coffee-3.png"),
     category: "Espresso",
     rating: 4.2,
     description:
@@ -25,7 +25,7 @@ export const coffees = [
     id: 2,
     name: "Mocha Fusi",
     price: 7.53,
-    image: images.Coffee5,
+    image: require("../assets/images/coffee-5.png"),
     category: "Mocha",
     rating: 4.3,
     description:
@@ -35,7 +35,7 @@ export const coffees = [
     id: 3,
     name: "Caffe Panna",
     price: 5.53,
-    image: images.Coffee4,
+    image: require("../assets/images/coffee-4.png"),
     category: "Mocha",
     rating: 4.6,
     description:
@@ -45,7 +45,7 @@ export const coffees = [
     id: 4,
     name: "Espresso Doppio",
     price: 2.99,
-    image: images.Doppio,
+    image: require("../assets/images/doppio.png"),
     category: "Espresso",
     rating: 4.7,
     description:
@@ -56,7 +56,7 @@ export const coffees = [
     id: 5,
     name: "Americano Classic",
     price: 3.25,
-    image: images.Coffee1,
+    image: require("../assets/images/coffee-1.png"),
     category: "Americano",
     rating: 4.1,
     description:
@@ -66,7 +66,7 @@ export const coffees = [
     id: 6,
     name: "Cold Brew Delight",
     price: 4.75,
-    image: images.ColdBrew,
+    image: require("../assets/images/cold-brew.png"),
     category: "Cold Brew",
     rating: 4.4,
     description:
@@ -77,7 +77,7 @@ export const coffees = [
     id: 7,
     name: "Vanilla Latte",
     price: 4.25,
-    image: images.VanillaLatte,
+    image: require("../assets/images/vanilla-latte.png"),
     category: "Latte",
     rating: 4.3,
     description:
@@ -88,7 +88,7 @@ export const coffees = [
     name: "Caramel Macchiato",
     price: 4.99,
     category: "Macchiato",
-    image: images.CaramelMacchiato,
+    image: require("../assets/images/caramel-machiato.png"),
     rating: 4.6,
     description:
       "Vanilla-sweetened espresso marked with steamed milk and drizzled with rich caramel sauce, creating a perfectly balanced sweet coffee.",
