@@ -13,9 +13,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/favicon.png",
         "backgroundColor": "#F9F9F9"
-      }
+      },
+      "package": "com.anonymous.coffeeshop"
     },
     "web": {
       "bundler": "metro",

@@ -4,6 +4,10 @@ import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import "react-native-gesture-handler";
+import "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import "./global.css";
 
 type RouteType = "(tabs)" | "onboarding" | null;
@@ -57,16 +61,18 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack
-      initialRouteName={initialRoute}
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="onboarding" />
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="(order)" />
-      <Stack.Screen name="details/[id]" />
-    </Stack>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Stack
+        initialRouteName={initialRoute}
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="onboarding" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="(order)" />
+        <Stack.Screen name="details/[id]" />
+      </Stack>
+    </GestureHandlerRootView>
   );
 }
