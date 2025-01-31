@@ -1,4 +1,3 @@
-// app/_layout.tsx
 import { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
@@ -7,9 +6,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import "react-native-gesture-handler";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
 import "./global.css";
-
 type RouteType = "(tabs)" | "onboarding" | null;
 
 export default function RootLayout() {
@@ -63,12 +66,17 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack
-        initialRouteName={initialRoute}
+        initialRouteName="onboarding"
         screenOptions={{
           headerShown: false,
+          gestureEnabled: true,
+          animation: "ios_from_right",
         }}
       >
+        {/* Onboarding with a Fade-In Transition */}
         <Stack.Screen name="onboarding" />
+
+        {/* Default Tabs & Other Screens */}
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(order)" />
         <Stack.Screen name="details/[id]" />
