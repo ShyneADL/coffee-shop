@@ -59,7 +59,27 @@ export default Delivery;
 
 const Bottom = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = ["20%", "50%"];
+  const snapPoints = ["21%", "50%"];
+
+  const pulseAnim = useRef(new Animated.Value(0.5)).current;
+
+  useEffect(() => {
+    // Create a continuous pulsing animation
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
+          toValue: 0.5,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, [pulseAnim]);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -118,8 +138,8 @@ const Bottom = () => {
               style={{ height: 4, minWidth: 50 }}
               className="flex flex-1 bg-[#36C07E] rounded-[20px]"
             />
-            <View
-              style={{ height: 4, minWidth: 50 }}
+            <Animated.View
+              style={{ height: 4, minWidth: 50, opacity: pulseAnim }}
               className="flex flex-1 bg-[#36C07E] rounded-[20px]"
             />
             <View
@@ -149,11 +169,31 @@ const Bottom = () => {
             </View>
           </View>
 
-          <View className="flex flex-row items-center">
-            <Image
-              source={images.Man}
-              style={{ width: 44, height: 44, borderRadius: 14 }}
-            />
+          <View
+            style={{ width: "100%" }}
+            className="flex flex-row items-center justify-between mt-[14px]"
+          >
+            <View className="flex flex-row items-center gap-4">
+              <Image
+                source={images.Man}
+                style={{ width: 56, height: 56, borderRadius: 14 }}
+              />
+              <View style={{ width: 135 }}>
+                <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
+                  Brooklyn Simmons
+                </Text>
+                <Text className="font-Sora text-xs leading-[120%] text-lightGrey tracking-0 mt-[4px]">
+                  Personal Courier
+                </Text>
+              </View>
+            </View>
+            <View className="rounded-[12px] bg-transparent border border-[#E3E3E3] p-[10px]">
+              <Image
+                source={icons.Phone}
+                style={{ width: 24, height: 24 }}
+                resizeMode="contain"
+              />
+            </View>
           </View>
         </BottomSheetView>
       </BottomSheet>
