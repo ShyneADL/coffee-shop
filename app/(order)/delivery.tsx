@@ -59,7 +59,7 @@ export default Delivery;
 
 const Bottom = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = ["20%", "48%"];
+  const snapPoints = ["20%", "50%"];
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -84,13 +84,69 @@ const Bottom = () => {
           width: 45,
           height: 5,
           borderRadius: 16,
-          paddingHorizontal: 24,
+          marginTop: 16,
         }}
       >
-        <BottomSheetView className="flex items-center mt-[15px]">
-          <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-            10 minutes left
-          </Text>
+        <BottomSheetView
+          style={{ width: "100%" }}
+          className="flex items-center mt-[15px] px-[24px]"
+        >
+          {/* Texts */}
+          <View className="flex items-center">
+            <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
+              10 minutes left
+            </Text>
+            <Text className="font-Sora text-xs leading-[150%] text-lightGrey tracking-0 text-center mt-[2px]">
+              Delivery to{" "}
+              <Text className="font-Sora-semibold text-xs leading-[150%] text-black tracking-0 text-center">
+                Paul M. Valley
+              </Text>
+            </Text>
+          </View>
+
+          {/* Progress bars */}
+          <View
+            style={{ width: "100%" }}
+            className="flex flex-row items-center gap-[10px] mt-[25px] px-[6px]"
+          >
+            <View
+              style={{ height: 4, minWidth: 50 }}
+              className="flex flex-1 bg-[#36C07E] rounded-[20px]"
+            />
+            <View
+              style={{ height: 4, minWidth: 50 }}
+              className="flex flex-1 bg-[#36C07E] rounded-[20px]"
+            />
+            <View
+              style={{ height: 4, minWidth: 50 }}
+              className="flex flex-1 bg-[#36C07E] rounded-[20px]"
+            />
+            <View
+              style={{ height: 4, minWidth: 50 }}
+              className="flex flex-1 bg-[#E3E3E3] rounded-[20px]"
+            />
+          </View>
+
+          {/* Bottom */}
+          <View
+            style={{ width: "100%" }}
+            className="flex flex-row items-center justify-between bg-transparent rounded-[12px] border border-[#E3E3E3] px-3 py-[10.5px] mt-4"
+          >
+            <View className="bg-transparent rounded-[12px] border border-[#E3E3E3] p-[6px]">
+              <Image source={images.Bike} style={{ width: 44, height: 44 }} />
+            </View>
+            <View style={{ width: "100%" }}>
+              <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0 text-left">
+                Delivered your order
+              </Text>
+              <Text
+                style={{ width: "100%" }}
+                className="font-Sora-light text-xs leading-[150%] text-lightGrey tracking-0 text-left mt-[4px]"
+              >
+                We will deliver your goods to you in the shortest possible time.
+              </Text>
+            </View>
+          </View>
         </BottomSheetView>
       </BottomSheet>
     </GestureHandlerRootView>
