@@ -9,9 +9,10 @@ import {
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import images from "@/constants/images";
 import icons from "@/constants/icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 interface CountProps {
   count: number;

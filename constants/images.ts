@@ -1,6 +1,7 @@
 import Bean from "../assets/images/bean.png";
 import Bike from "../assets/images/bike.png";
 import GPS from "../assets/images/gps.png";
+import Map from "../assets/images/map.png";
 import Icon from "../assets/images/icon.png";
 import Library from "../assets/images/library.png";
 import Star from "../assets/images/star.png";
@@ -24,6 +25,7 @@ export default {
   Bean,
   Bike,
   GPS,
+  Map,
   Icon,
   Library,
   Star,
