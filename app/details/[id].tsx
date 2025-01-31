@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  ImageSourcePropType,
+} from "react-native";
 import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
@@ -7,15 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Detail = () => {
   // Extract the `id` and other parameters
-  const { id, ...params } = useLocalSearchParams<{
-    id: string;
-    name: string;
-    image: number;
-    category: string;
-    rating: number;
-    description: string;
-    price: number;
-  }>();
+  const { id, ...params } = useLocalSearchParams();
 
   const [activeSize, setActiveSize] = useState("M");
   const calculatePrice = () => {
@@ -58,7 +57,7 @@ const Detail = () => {
 
         {/* Coffee Image */}
         <Image
-          source={require("../../assets/images/coffee-details.png")} // Fallback image
+          source={params.Image}
           resizeMode="cover"
           style={{
             width: "100%",
@@ -194,7 +193,19 @@ const Detail = () => {
         <TouchableOpacity
           className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
           onPress={() => {
-            router.push("/(order)/order");
+            router.push({
+              pathname: "/(order)/order",
+              params: {
+                id: id,
+                name: params.name,
+                category: params.category,
+                price: currentPrice,
+                size: activeSize,
+                image: params.Image,
+                description: params.description,
+                rating: params.rating,
+              },
+            });
           }}
         >
           <Text

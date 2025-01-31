@@ -7,15 +7,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import { router } from "expo-router";
+import { router, Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { coffees } from "@/constants/coffee";
 import Search from "@/components/Search";
 import CoffeeCard from "@/components/CoffeeCard";
-
-type AppRoutes = "/" | "/details/[id]";
 
 const Index = () => {
   const categories = [
@@ -162,22 +160,9 @@ const Index = () => {
             showsVerticalScrollIndicator={false}
           >
             {filteredCoffees.map((coffee) => (
-              <TouchableOpacity
+              <Link
                 key={coffee.id}
-                onPress={() => {
-                  router.push({
-                    pathname: `/details/${coffee.id}` as AppRoutes,
-                    params: {
-                      id: coffee.id,
-                      name: coffee.name,
-                      image: coffee.image,
-                      category: coffee.category,
-                      rating: coffee.rating,
-                      description: coffee.description,
-                      price: coffee.price,
-                    },
-                  });
-                }}
+                href={{ pathname: "/details/[id]", params: { ...coffee } }}
               >
                 <CoffeeCard
                   image={coffee.image}
@@ -186,7 +171,7 @@ const Index = () => {
                   price={coffee.price}
                   rating={coffee.rating}
                 />
-              </TouchableOpacity>
+              </Link>
             ))}
           </ScrollView>
         </View>

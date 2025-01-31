@@ -1,10 +1,17 @@
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  ImageSourcePropType,
+} from "react-native";
 import React from "react";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 
 interface CoffeeCardProps {
-  image: number;
+  image: ImageSourcePropType;
   title: string;
   category: string;
   price: number;

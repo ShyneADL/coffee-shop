@@ -1,49 +1,30 @@
-import Bean from "../assets/images/bean.png";
-import Bike from "../assets/images/bike.png";
-import GPS from "../assets/images/gps.png";
-import Map from "../assets/images/map.png";
-import Icon from "../assets/images/icon.png";
-import Library from "../assets/images/library.png";
-import Star from "../assets/images/star.png";
-import Milk from "../assets/images/milk.png";
-import MinusFaded from "../assets/images/minus-circle-faded.png";
-import Minus from "../assets/images/minus-circle.png";
-import Plus from "../assets/images/plus-circle.png";
-import Man from "../assets/images/man.png";
-import Banner from "../assets/images/banner.png";
-import Coffee1 from "../assets/images/coffee-1.png";
-import Coffee2 from "../assets/images/coffee-2.png";
-import Coffee3 from "../assets/images/coffee-3.png";
-import Coffee4 from "../assets/images/coffee-4.png";
-import Coffee5 from "../assets/images/coffee-5.png";
-import Coffee6 from "../assets/images/coffee-6.png";
-import Doppio from "../assets/images/doppio.png";
-import ColdBrew from "../assets/images/cold-brew.png";
-import VanillaLatte from "../assets/images/vanilla-latte.png";
-import CaramelMacchiato from "../assets/images/caramel-machiato.png";
+import { ImageSourcePropType } from "react-native";
 
-export default {
-  Bean,
-  Man,
-  Bike,
-  GPS,
-  Map,
-  Icon,
-  Library,
-  Star,
-  Milk,
-  MinusFaded,
-  Minus,
-  Plus,
-  Banner,
-  Coffee1,
-  Coffee2,
-  Coffee3,
-  Coffee4,
-  Coffee5,
-  Coffee6,
-  Doppio,
-  ColdBrew,
-  VanillaLatte,
-  CaramelMacchiato,
-};
+const images = {
+  Bean: require("../assets/images/bean.png"),
+  Man: require("../assets/images/man.png"),
+  Bike: require("../assets/images/bike.png"),
+  GPS: require("../assets/images/gps.png"),
+  Map: require("../assets/images/map.png"),
+  Icon: require("../assets/images/icon.png"),
+  Library: require("../assets/images/library.png"),
+  Star: require("../assets/images/star.png"),
+  Milk: require("../assets/images/milk.png"),
+  MinusFaded: require("../assets/images/minus-circle-faded.png"),
+  Minus: require("../assets/images/minus-circle.png"),
+  Plus: require("../assets/images/plus-circle.png"),
+  Man: require("../assets/images/man.png"),
+  Banner: require("../assets/images/banner.png"),
+  Coffee1: require("../assets/images/coffee-1.png"),
+  Coffee2: require("../assets/images/coffee-2.png"),
+  Coffee3: require("../assets/images/coffee-3.png"),
+  Coffee4: require("../assets/images/coffee-4.png"),
+  Coffee5: require("../assets/images/coffee-5.png"),
+  Coffee6: require("../assets/images/coffee-6.png"),
+  Doppio: require("../assets/images/doppio.png"),
+  ColdBrew: require("../assets/images/cold-brew.png"),
+  VanillaLatte: require("../assets/images/vanilla-latte.png"),
+  CaramelMacchiato: require("../assets/images/caramel-machiato.png"),
+} as const;
+
+export default images;

@@ -8,7 +8,7 @@ import {
   Animated,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "@/constants/images";
@@ -190,6 +190,9 @@ const Order = () => {
 };
 
 const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
+  const params = useLocalSearchParams();
+  const calculatedPrice = (Number(params.price) * count).toFixed(2);
+
   return (
     <View className="flex flex-1 pb-[100px]">
       {/* Top part */}
@@ -233,16 +236,16 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
       <View className="flex flex-row items-center justify-between mt-4">
         <View className="flex flex-row items-center gap-4">
           <Image
-            source={images.Coffee4}
+            source={params.Image}
             style={{ width: 54, height: 54, borderRadius: 8 }}
             resizeMode="cover"
           />
           <View>
             <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              Caffe Mocha
+              {params.name}
             </Text>
             <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
-              Deep Foam
+              {params.category}
             </Text>
           </View>
         </View>
@@ -304,7 +307,7 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
               Price
             </Text>
             <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-              $ 4.53
+              {calculatedPrice}
             </Text>
           </View>
           <View className="flex flex-row items-center justify-between mt-2">
@@ -327,6 +330,8 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
 };
 
 const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
+  const params = useLocalSearchParams();
+  const calculatedPrice = (Number(params.price) * count).toFixed(2);
   return (
     <View className="flex flex-1 pb-[100px]">
       {/* Top part */}
@@ -370,16 +375,16 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
       <View className="flex flex-row items-center justify-between mt-4">
         <View className="flex flex-row items-center gap-4">
           <Image
-            source={images.Coffee4}
+            source={params.Image}
             style={{ width: 54, height: 54, borderRadius: 8 }}
             resizeMode="cover"
           />
           <View>
             <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              Caffe Mocha
+              {params.name}
             </Text>
             <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
-              Deep Foam
+              {params.category}
             </Text>
           </View>
         </View>
@@ -441,7 +446,7 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
               Price
             </Text>
             <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-              $ 4.53
+              {calculatedPrice}
             </Text>
           </View>
         </View>
