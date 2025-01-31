@@ -236,7 +236,7 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
       <View className="flex flex-row items-center justify-between mt-4">
         <View className="flex flex-row items-center gap-4">
           <Image
-            source={params.Image}
+            source={params.image}
             style={{ width: 54, height: 54, borderRadius: 8 }}
             resizeMode="cover"
           />
@@ -375,7 +375,7 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
       <View className="flex flex-row items-center justify-between mt-4">
         <View className="flex flex-row items-center gap-4">
           <Image
-            source={params.Image}
+            source={params.image}
             style={{ width: 54, height: 54, borderRadius: 8 }}
             resizeMode="cover"
           />

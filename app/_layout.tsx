@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
+import { Animated } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import "react-native-gesture-handler";
@@ -70,13 +71,11 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
-          animation: "ios_from_right",
+          animation: "slide_from_right",
         }}
       >
-        {/* Onboarding with a Fade-In Transition */}
         <Stack.Screen name="onboarding" />
 
-        {/* Default Tabs & Other Screens */}
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(order)" />
         <Stack.Screen name="details/[id]" />

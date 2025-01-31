@@ -57,7 +57,7 @@ const Detail = () => {
 
         {/* Coffee Image */}
         <Image
-          source={params.Image}
+          source={params.image}
           resizeMode="cover"
           style={{
             width: "100%",
@@ -201,7 +201,7 @@ const Detail = () => {
                 category: params.category,
                 price: currentPrice,
                 size: activeSize,
-                image: params.Image,
+                image: params.image,
                 description: params.description,
                 rating: params.rating,
               },
