@@ -1,11 +1,9 @@
 import { Tabs } from "expo-router";
-import { Image, ImageSourcePropType, View } from "react-native";
+import { View } from "react-native";
 
-import icons from "@/constants/icons";
 import BagIcon from "@/components/BagIcon";
 import HomeIcon from "@/components/HomeIcon";
 import LikeIcon from "@/components/LikeIcon";
-import NotificationIcon from "@/components/NotificationIcon";
 
 const TabIcon = ({ focused, icon }: { focused: boolean; icon: string }) => {
   const color = focused ? "#C67C4E" : "#A2A2A2";
@@ -18,9 +16,6 @@ const TabIcon = ({ focused, icon }: { focused: boolean; icon: string }) => {
         return <BagIcon color={color} />;
       case "Home":
         return <HomeIcon color={color} />;
-      case "Notification":
-        return <NotificationIcon color={color} />;
-      default:
         return null;
     }
   };
@@ -68,7 +63,7 @@ const TabsLayout = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
-          paddingBottom: 6,
+          paddingBottom: 10,
           paddingTop: 24,
           bottom: 0,
           minHeight: 65,
@@ -98,15 +93,6 @@ const TabsLayout = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => <TabIcon focused={focused} icon="Bag" />,
-        }}
-      />
-      <Tabs.Screen
-        name="notifications"
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="Notification" />
-          ),
         }}
       />
     </Tabs>

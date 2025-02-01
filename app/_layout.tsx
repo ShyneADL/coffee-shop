@@ -60,6 +60,7 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
+          animation: "slide_from_right",
         }}
       >
         <Stack.Screen name="onboarding" />
