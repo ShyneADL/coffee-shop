@@ -7,12 +7,8 @@ module.exports = {
       fontFamily: {
         Sora: ["Sora-Regular", "sans-serif"],
         "Sora-bold": ["Sora-Bold", "sans-serif"],
-        "Sora-extrabold": ["Sora-ExtraBold", "sans-serif"],
-        "Sora-medium": ["Sora-Medium", "sans-serif"],
         "Sora-semibold": ["Sora-SemiBold", "sans-serif"],
         "Sora-light": ["Sora-Light", "sans-serif"],
-        "Sora-extralight": ["Sora-ExtraLight", "sans-serif"],
-        "Sora-thin": ["Sora-Thin", "sans-serif"],
       },
       colors: {
         primary: {

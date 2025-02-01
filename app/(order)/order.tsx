@@ -13,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "@/constants/images";
 import icons from "@/constants/icons";
+import { coffees } from "@/constants/coffee";
 
 interface CountProps {
   count: number;
@@ -190,8 +191,12 @@ const Order = () => {
 };
 
 const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
-  const params = useLocalSearchParams();
-  const calculatedPrice = (Number(params.price) * count).toFixed(2);
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { price } = useLocalSearchParams<{ price: string }>();
+
+  // Find the coffee by id
+  const coffee = coffees.find((c) => c.id === Number(id));
+  const calculatedPrice = (Number(price) * count).toFixed(2);
 
   return (
     <View className="flex flex-1 pb-[100px]">
@@ -236,16 +241,16 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
       <View className="flex flex-row items-center justify-between mt-4">
         <View className="flex flex-row items-center gap-4">
           <Image
-            source={params.image}
+            source={coffee?.image}
             style={{ width: 54, height: 54, borderRadius: 8 }}
             resizeMode="cover"
           />
           <View>
             <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              {params.name}
+              {coffee?.name}
             </Text>
             <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
-              {params.category}
+              {coffee?.category}
             </Text>
           </View>
         </View>
@@ -330,8 +335,12 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
 };
 
 const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
-  const params = useLocalSearchParams();
-  const calculatedPrice = (Number(params.price) * count).toFixed(2);
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { price } = useLocalSearchParams<{ price: string }>();
+
+  // Find the coffee by id
+  const coffee = coffees.find((c) => c.id === Number(id));
+  const calculatedPrice = (Number(price) * count).toFixed(2);
   return (
     <View className="flex flex-1 pb-[100px]">
       {/* Top part */}
@@ -375,16 +384,16 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
       <View className="flex flex-row items-center justify-between mt-4">
         <View className="flex flex-row items-center gap-4">
           <Image
-            source={params.image}
+            source={coffee?.image}
             style={{ width: 54, height: 54, borderRadius: 8 }}
             resizeMode="cover"
           />
           <View>
             <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              {params.name}
+              {coffee?.name}
             </Text>
             <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
-              {params.category}
+              {coffee?.category}
             </Text>
           </View>
         </View>

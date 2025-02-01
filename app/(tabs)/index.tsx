@@ -5,6 +5,7 @@ import {
   ScrollView,
   ImageBackground,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import { router, Link } from "expo-router";
@@ -161,13 +162,15 @@ const Index = () => {
           >
             {filteredCoffees.map((coffee) => (
               <Link key={coffee.id} href={`/details/${coffee.id}`} asChild>
-                <CoffeeCard
-                  image={coffee.image}
-                  title={coffee.name}
-                  category={coffee.category}
-                  price={coffee.price}
-                  rating={coffee.rating}
-                />
+                <Pressable>
+                  <CoffeeCard
+                    image={coffee.image}
+                    title={coffee.name}
+                    category={coffee.category}
+                    price={coffee.price}
+                    rating={coffee.rating}
+                  />
+                </Pressable>
               </Link>
             ))}
           </ScrollView>

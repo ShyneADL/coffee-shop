@@ -7,11 +7,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import "react-native-gesture-handler";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
 
 import "./global.css";
 type RouteType = "(tabs)" | "onboarding" | null;
@@ -19,17 +14,11 @@ type RouteType = "(tabs)" | "onboarding" | null;
 export default function RootLayout() {
   const [initialRoute, setInitialRoute] = useState<RouteType>(null);
   const [fontsLoaded] = useFonts({
-    "Sora-Thin": require("../assets/fonts/Sora-Thin.ttf"),
     "Sora-Light": require("../assets/fonts/Sora-Light.ttf"),
-    "Sora-ExtraLight": require("../assets/fonts/Sora-ExtraLight.ttf"),
     "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),
-    "Sora-Medium": require("../assets/fonts/Sora-Medium.ttf"),
     "Sora-SemiBold": require("../assets/fonts/Sora-SemiBold.ttf"),
     "Sora-Bold": require("../assets/fonts/Sora-Bold.ttf"),
-    "Sora-ExtraBold": require("../assets/fonts/Sora-ExtraBold.ttf"),
   });
-
-  const router = useRouter();
 
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
@@ -71,7 +60,6 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
-          animation: "slide_from_right",
         }}
       >
         <Stack.Screen name="onboarding" />

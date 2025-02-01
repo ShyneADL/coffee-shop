@@ -1,41 +1,22 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from "react-native";
+import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useQuery } from "@tanstack/react-query";
+
+import { coffees } from "@/constants/coffee";
 
 const Detail = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  async function fetchCoffeeById(id: number) {
-    const res = await fetch(`http://localhost:8081/details/${id}`);
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error("Error");
-    }
-    return data;
-  }
 
-  const {
-    data: coffee,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["coffees", id],
-    queryFn: () => fetchCoffeeById(Number(id)),
-  });
+  const coffee = coffees.find((c) => c.id === Number(id));
 
   const [activeSize, setActiveSize] = useState("M");
+
+  // Calculate price based on size
   const calculatePrice = () => {
-    const basePrice = Number(coffee.price);
+    const basePrice = Number(coffee?.price || 0);
 
     if (activeSize === "S") {
       return basePrice - 1.0;
@@ -74,7 +55,7 @@ const Detail = () => {
 
         {/* Coffee Image */}
         <Image
-          source={coffee.image}
+          source={coffee?.image}
           resizeMode="cover"
           style={{
             width: "100%",
@@ -88,10 +69,10 @@ const Detail = () => {
         <View className="flex flex-row items-center justify-between mt-4">
           <View>
             <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
-              {coffee.name || "Coffee Title"}
+              {coffee?.name || "Coffee Title"}
             </Text>
             <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%] mt-1">
-              {coffee.category || "Coffee Category"}
+              {coffee?.category || "Coffee Category"}
             </Text>
             <View className="flex flex-row gap-1 mt-4">
               <Image
@@ -101,7 +82,7 @@ const Detail = () => {
                 className="size-5"
               />
               <Text className="font-Sora-semibold text-[1rem] text-black">
-                {coffee.rating || "0"}
+                {coffee?.rating || "0"}
                 <Text className="font-Sora text-[0.75rem] text-lightGrey ml-[4px]">
                   (230)
                 </Text>
@@ -122,7 +103,6 @@ const Detail = () => {
         </View>
 
         {/* Divider */}
-
         <View className="flex flex-1 items-center justify-center mt-4">
           <View style={{ width: "90%", height: 1 }} className="bg-[#E3E3E3]" />
         </View>
@@ -133,7 +113,7 @@ const Detail = () => {
             Description
           </Text>
           <Text className="text-lightGrey font-Sora-light text-[0.875rem] leading-[150%] mt-2">
-            {coffee.description || "No description available."}
+            {coffee?.description || "No description available."}
           </Text>
         </View>
 
@@ -144,7 +124,7 @@ const Detail = () => {
           </Text>
           <View className="flex flex-row items-center justify-between overflow-hidden gap-4 mt-4">
             <TouchableOpacity
-              className={` py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
+              className={`py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
                 activeSize === "S"
                   ? "bg-primary-100 border-primary"
                   : "bg-white border-[#E3E3E3]"
@@ -160,7 +140,7 @@ const Detail = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={` py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
+              className={`py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
                 activeSize === "M"
                   ? "bg-primary-100 border-primary"
                   : "bg-white border-[#E3E3E3]"
@@ -194,6 +174,7 @@ const Detail = () => {
           </View>
         </View>
       </ScrollView>
+
       {/* Coffee Price */}
       <View
         style={{ minHeight: 84, width: "100%" }}
@@ -207,20 +188,15 @@ const Detail = () => {
             $ {currentPrice.toFixed(2)}
           </Text>
         </View>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
           onPress={() => {
             router.push({
               pathname: "/(order)/order",
-              coffee: {
+              params: {
                 id: id,
-                name: coffee.name,
-                category: coffee.category,
-                price: currentPrice,
+                price: currentPrice.toFixed(2),
                 size: activeSize,
-                image: coffee.image,
-                description: coffee.description,
-                rating: coffee.rating,
               },
             });
           }}
@@ -231,7 +207,7 @@ const Detail = () => {
           >
             Buy Now
           </Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
