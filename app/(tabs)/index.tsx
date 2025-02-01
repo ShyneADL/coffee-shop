@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Pressable,
+  StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
 import { router, Link } from "expo-router";
@@ -34,89 +35,46 @@ const Index = () => {
   );
 
   return (
-    <SafeAreaView className="bg-[#F9F9F9] flex flex-1">
-      <ScrollView className="relative h-full flex flex-1 bg-[#F9F9F9] pb-[128px]">
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        style={styles.scrollView}
+      >
         {/* Top part */}
-        <View className="w-full">
-          <View className="absolute w-full h-[280px] top-0 bg-gradient-to-br from-[#111111] to-[#313131]"></View>
-          <View className="px-6 mt-10 flex gap-[7px]">
-            {/* Black background */}
-            <View className="absolute w-full h-[280px] top-0 bg-gradient-to-[240.86deg] from-[#111111] to-black" />
+        <View style={styles.topContainer}>
+          <View style={styles.gradientBackground} />
+          <View style={styles.contentContainer}>
             {/* Location View */}
             <View>
-              <Text className="font-Sora text-[0.75rem] leading-[120%] tracking-[1%] text-[#A2A2A2]">
-                Location
-              </Text>
-              <View className="flex flex-row gap-1 items-center mt-2">
-                <Text className="font-Sora-semibold text-sm text-white leading-[150%] tracking-[0] ">
-                  Manhattan, New York
-                </Text>
-                <Image source={icons.Down} style={{ width: 14, height: 14 }} />
+              <Text style={styles.locationText}>Location</Text>
+              <View style={styles.locationContainer}>
+                <Text style={styles.locationName}>Manhattan, New York</Text>
+                <Image source={icons.Down} style={styles.downIcon} />
               </View>
             </View>
             {/* Search View */}
             <Search />
           </View>
         </View>
-        {/*Mid - Bottom part */}
-        <View className="flex px-6 mt-6">
+        {/* Mid - Bottom part */}
+        <View style={styles.midBottomContainer}>
           {/* Buy one */}
           <ImageBackground
             source={images.Banner}
             resizeMode="cover"
-            style={{
-              width: "100%", // Full width of the parent container
-              height: 140, // Fixed height
-              justifyContent: "flex-start", // Align content to the top
-              alignItems: "flex-start", // Align content to the left
-              overflow: "hidden", // Hide overflow
-              borderRadius: 12, // Rounded corners
-              paddingVertical: 13, // Vertical padding
-              paddingHorizontal: 24, // Horizontal padding
-            }}
+            style={styles.banner}
           >
-            <View
-              style={{ width: 60, height: 26 }}
-              className="py-1 px-[6px] rounded-[8px] bg-[#ED5151]"
-            >
-              <Text className="font-Sora-semibold text-white text-sm trackng-0">
-                Promo
-              </Text>
+            <View style={styles.promoContainer}>
+              <Text style={styles.promoText}>Promo</Text>
             </View>
-            <View className="w-[203px]">
-              <View style={{ position: "relative" }}>
-                <Text
-                  style={{
-                    fontFamily: "Sora-Semibold",
-                    fontSize: 32,
-                    color: "white",
-                    paddingVertical: 4,
-                    zIndex: 2,
-                  }}
-                >
-                  Buy one get
-                </Text>
-                <View
-                  style={{ width: 200, height: 27, zIndex: 1 }}
-                  className="absolute top-[19px] left-[-1px]  bg-black"
-                ></View>
+            <View style={styles.bannerTextContainer}>
+              <View style={styles.bannerTextWrapper}>
+                <Text style={styles.bannerText}>Buy one get</Text>
+                <View style={styles.bannerTextBackground} />
               </View>
-              <View style={{ position: "relative" }}>
-                <Text
-                  style={{
-                    fontFamily: "Sora-Semibold",
-                    fontSize: 32,
-                    color: "white",
-                    paddingVertical: 4,
-                    zIndex: 2,
-                  }}
-                >
-                  one FREE
-                </Text>
-                <View
-                  style={{ width: 149, height: 23, zIndex: 1 }}
-                  className="absolute top-[19px] left-[-1px]  bg-black"
-                ></View>
+              <View style={styles.bannerTextWrapper}>
+                <Text style={styles.bannerText}>one FREE</Text>
+                <View style={styles.bannerTextBackground} />
               </View>
             </View>
           </ImageBackground>
@@ -124,23 +82,24 @@ const Index = () => {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={{ gap: "1rem" }}
-            className="flex flex-row gap-4 items-center mt-4"
+            contentContainerStyle={styles.coffeeListContent}
           >
             {categories.map((category) => (
               <TouchableOpacity
                 key={category}
-                className={`${
-                  selectedCategory === category ? "bg-primary" : "bg-alt-grey"
-                } px-2 py-1 rounded-[6px] mr-4`}
+                style={[
+                  styles.categoryButton,
+                  selectedCategory === category &&
+                    styles.selectedCategoryButton,
+                ]}
                 onPress={() => setSelectedCategory(category)}
               >
                 <Text
-                  className={`${
-                    selectedCategory === category
-                      ? "text-white font-Sora-semibold"
-                      : "text-black font-Sora"
-                  } leading-[150%] text-sm `}
+                  style={[
+                    styles.categoryText,
+                    selectedCategory === category &&
+                      styles.selectedCategoryText,
+                  ]}
                 >
                   {category}
                 </Text>
@@ -148,18 +107,7 @@ const Index = () => {
             ))}
           </ScrollView>
           {/* Coffee cards */}
-          <ScrollView
-            contentContainerStyle={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              gap: 15, // Horizontal gap
-              rowGap: 24, // Vertical gap
-              paddingTop: 16, // mt-4 equivalent (4 * 4 = 16)
-              width: "100%",
-            }}
-            showsVerticalScrollIndicator={false}
-          >
+          <View style={styles.coffeeCardsContainer}>
             {filteredCoffees.map((coffee) => (
               <Link key={coffee.id} href={`/details/${coffee.id}`} asChild>
                 <Pressable>
@@ -173,11 +121,145 @@ const Index = () => {
                 </Pressable>
               </Link>
             ))}
-          </ScrollView>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: "#F9F9F9",
+    flex: 1,
+  },
+  scrollView: {
+    backgroundColor: "#F9F9F9",
+    paddingBottom: 128,
+  },
+  scrollViewContent: {
+    flexGrow: 1, // Ensures the content takes up the full height
+  },
+  topContainer: {
+    width: "100%",
+  },
+  gradientBackground: {
+    position: "absolute",
+    width: "100%",
+    height: 280,
+    top: 0,
+    backgroundColor: "#111111",
+  },
+  contentContainer: {
+    paddingHorizontal: 24,
+    marginTop: 40,
+    gap: 7,
+  },
+  locationText: {
+    fontFamily: "Sora",
+    fontSize: 12,
+    color: "#A2A2A2",
+  },
+  locationContainer: {
+    flexDirection: "row",
+    gap: 4,
+    alignItems: "center",
+    marginTop: 8,
+  },
+  locationName: {
+    fontFamily: "Sora-Semibold",
+    fontSize: 14,
+    color: "white",
+  },
+  downIcon: {
+    width: 14,
+    height: 14,
+  },
+  midBottomContainer: {
+    paddingHorizontal: 24,
+    marginTop: 24,
+  },
+  banner: {
+    width: "100%",
+    height: 140,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    overflow: "hidden",
+    borderRadius: 12,
+    paddingVertical: 13,
+    paddingHorizontal: 24,
+  },
+  promoContainer: {
+    width: 60,
+    height: 26,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    borderRadius: 8,
+    backgroundColor: "#ED5151",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  promoText: {
+    fontFamily: "Sora-Semibold",
+    fontSize: 14,
+    color: "white",
+  },
+  bannerTextContainer: {
+    width: 203,
+  },
+  bannerTextWrapper: {
+    position: "relative",
+  },
+  bannerText: {
+    fontFamily: "Sora-Semibold",
+    fontSize: 32,
+    color: "white",
+    paddingVertical: 4,
+    zIndex: 2,
+  },
+  bannerTextBackground: {
+    width: 200,
+    height: 27,
+    backgroundColor: "black",
+    position: "absolute",
+    top: 19,
+    left: -1,
+    zIndex: 1,
+  },
+  coffeeListContent: {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+    marginTop: 16,
+  },
+  categoryButton: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    backgroundColor: "#F0F0F0",
+    marginRight: 16,
+  },
+  selectedCategoryButton: {
+    backgroundColor: "#ED5151",
+  },
+  categoryText: {
+    fontFamily: "Sora",
+    fontSize: 14,
+    color: "black",
+  },
+  selectedCategoryText: {
+    color: "white",
+    fontFamily: "Sora-Semibold",
+  },
+  coffeeCardsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 15,
+    rowGap: 24,
+    paddingTop: 16,
+    width: "100%",
+  },
+});
 
 export default Index;

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Animated,
+  StyleSheet,
 } from "react-native";
 import React, { useEffect, useRef, useCallback } from "react";
 import { router } from "expo-router";
@@ -19,30 +20,26 @@ import icons from "@/constants/icons";
 const Delivery = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ImageBackground
-        source={images.Map}
-        style={{ width: "100%", height: "100%" }}
-        className="flex flex-1"
-      >
-        <SafeAreaView className="flex flex-1">
+      <ImageBackground source={images.Map} style={styles.imageBackground}>
+        <SafeAreaView style={styles.safeArea}>
           {/* Top Part */}
-          <View className="px-6 flex flex-row justify-between items-center py-12">
+          <View style={styles.topContainer}>
             <TouchableOpacity
-              className="p-[10px] bg-[#EDEDED] rounded-[12px]"
+              style={styles.backButton}
               onPress={() => router.back()}
             >
               <Image
                 source={icons.Left}
-                style={{ width: 24, height: 24 }}
+                style={styles.icon}
                 resizeMode="contain"
               />
             </TouchableOpacity>
 
-            <TouchableOpacity className="p-[10px] bg-[#EDEDED] rounded-[12px]">
+            <TouchableOpacity style={styles.gpsButton}>
               <Image
                 source={images.GPS}
                 resizeMode="contain"
-                style={{ width: 24, height: 24 }}
+                style={styles.icon}
               />
             </TouchableOpacity>
           </View>
@@ -93,116 +90,62 @@ const Bottom = () => {
 
   // renders
   return (
-    <GestureHandlerRootView
-      style={{
-        flex: 1,
-        height: 322,
-      }}
-    >
+    <GestureHandlerRootView style={styles.bottomSheetContainer}>
       <BottomSheet
         index={0}
         snapPoints={snapPoints} // Snap points for the sheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
-        style={{ flex: 1 }}
-        handleIndicatorStyle={{
-          backgroundColor: "#E3E3E3",
-          width: 45,
-          height: 5,
-          borderRadius: 16,
-          marginTop: 16,
-        }}
+        style={styles.bottomSheet}
+        handleIndicatorStyle={styles.handleIndicator}
       >
-        <BottomSheetView
-          style={{ width: "100%" }}
-          className="flex items-center mt-[15px] px-[24px]"
-        >
+        <BottomSheetView style={styles.bottomSheetContent}>
           {/* Texts */}
-          <View className="flex items-center">
-            <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              10 minutes left
-            </Text>
-            <View className="flex flex-row items-center">
-              <Text className="font-Sora text-xs leading-[150%] text-lightGrey tracking-0 text-center mt-[2px]">
-                Delivery to{" "}
-              </Text>
-              <Text className="font-Sora-semibold text-xs leading-[150%] text-black tracking-0 text-center">
-                Paul M. Valley
-              </Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.timeText}>10 minutes left</Text>
+            <View style={styles.deliveryTextContainer}>
+              <Text style={styles.deliveryText}>Delivery to </Text>
+              <Text style={styles.deliveryName}>Paul M. Valley</Text>
             </View>
           </View>
 
           {/* Progress bars */}
-          <View
-            style={{ width: "100%" }}
-            className="flex flex-row items-center gap-[10px] mt-[25px] px-[6px]"
-          >
-            <View
-              style={{ height: 4, minWidth: 50 }}
-              className="flex flex-1 bg-[#36C07E] rounded-[20px]"
-            />
-            <View
-              style={{ height: 4, minWidth: 50 }}
-              className="flex flex-1 bg-[#36C07E] rounded-[20px]"
-            />
-            <View
-              style={{ height: 4, minWidth: 50 }}
-              className=" relative flex flex-1 bg-[#E3E3E3] rounded-[20px]"
-            >
-              <View
-                style={{ height: 4, minWidth: 50, opacity: pulseAnim }}
-                className="absolute inset-0 flex flex-1 bg-[#36C07E] rounded-[20px]"
+          <View style={styles.progressBarContainer}>
+            <View style={[styles.progressBar, styles.progressBarFilled]} />
+            <View style={[styles.progressBar, styles.progressBarFilled]} />
+            <View style={[styles.progressBar, styles.progressBarPulsing]}>
+              <Animated.View
+                style={[styles.progressBarFilled, { opacity: pulseAnim }]}
               />
             </View>
-            <View
-              style={{ height: 4, minWidth: 50 }}
-              className="flex flex-1 bg-[#E3E3E3] rounded-[20px]"
-            />
+            <View style={[styles.progressBar, styles.progressBarEmpty]} />
           </View>
 
           {/* Bottom */}
-          <View
-            style={{ width: "100%" }}
-            className="flex flex-row items-center justify-between bg-transparent rounded-[12px] border border-[#E3E3E3] pl-3 py-[10.5px] mt-4"
-          >
-            <View className="bg-transparent rounded-[12px] border border-[#E3E3E3] p-[6px]">
-              <Image source={images.Bike} style={{ width: 44, height: 44 }} />
+          <View style={styles.deliveryInfoContainer}>
+            <View style={styles.bikeIconContainer}>
+              <Image source={images.Bike} style={styles.bikeIcon} />
             </View>
-            <View style={{ width: 243 }}>
-              <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0 text-left">
-                Delivered your order
-              </Text>
-              <Text
-                style={{ width: 243 }}
-                className="font-Sora-light text-xs leading-[150%] text-lightGrey tracking-0 text-left mt-[4px]"
-              >
+            <View style={styles.deliveryTextWrapper}>
+              <Text style={styles.deliveryInfoTitle}>Delivered your order</Text>
+              <Text style={styles.deliveryInfoDescription}>
                 We will deliver your goods to you in the shortest possible time.
               </Text>
             </View>
           </View>
 
-          <View
-            style={{ width: "100%" }}
-            className="flex flex-row items-center justify-between mt-[14px]"
-          >
-            <View className="flex flex-row items-center gap-4">
-              <Image
-                source={images.Man}
-                style={{ width: 56, height: 56, borderRadius: 14 }}
-              />
-              <View style={{ width: 135 }}>
-                <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-                  Brooklyn Simmons
-                </Text>
-                <Text className="font-Sora text-xs leading-[120%] text-lightGrey tracking-0 mt-[4px]">
-                  Personal Courier
-                </Text>
+          <View style={styles.courierContainer}>
+            <View style={styles.courierInfo}>
+              <Image source={images.Man} style={styles.courierImage} />
+              <View style={styles.courierTextWrapper}>
+                <Text style={styles.courierName}>Brooklyn Simmons</Text>
+                <Text style={styles.courierRole}>Personal Courier</Text>
               </View>
             </View>
-            <View className="rounded-[12px] bg-transparent border border-[#E3E3E3] p-[10px]">
+            <View style={styles.phoneIconContainer}>
               <Image
                 source={icons.Phone}
-                style={{ width: 24, height: 24 }}
+                style={styles.phoneIcon}
                 resizeMode="contain"
               />
             </View>
@@ -212,3 +155,190 @@ const Bottom = () => {
     </GestureHandlerRootView>
   );
 };
+
+const styles = StyleSheet.create({
+  imageBackground: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+  },
+  safeArea: {
+    flex: 1,
+  },
+  topContainer: {
+    paddingHorizontal: 24,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 48,
+  },
+  backButton: {
+    padding: 10,
+    backgroundColor: "#EDEDED",
+    borderRadius: 12,
+  },
+  gpsButton: {
+    padding: 10,
+    backgroundColor: "#EDEDED",
+    borderRadius: 12,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  bottomSheetContainer: {
+    flex: 1,
+    height: 322,
+  },
+  bottomSheet: {
+    flex: 1,
+  },
+  handleIndicator: {
+    backgroundColor: "#E3E3E3",
+    width: 45,
+    height: 5,
+    borderRadius: 16,
+    marginTop: 16,
+  },
+  bottomSheetContent: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 15,
+    paddingHorizontal: 24,
+  },
+  textContainer: {
+    alignItems: "center",
+  },
+  timeText: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+    lineHeight: 24,
+  },
+  deliveryTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  deliveryText: {
+    fontSize: 12,
+    fontFamily: "Sora",
+    color: "#A2A2A2",
+    lineHeight: 18,
+  },
+  deliveryName: {
+    fontSize: 12,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+    lineHeight: 18,
+  },
+  progressBarContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 25,
+    paddingHorizontal: 6,
+  },
+  progressBar: {
+    height: 4,
+    minWidth: 50,
+    borderRadius: 20,
+    flex: 1,
+  },
+  progressBarFilled: {
+    backgroundColor: "#36C07E",
+  },
+  progressBarPulsing: {
+    backgroundColor: "#E3E3E3",
+    position: "relative",
+  },
+  progressBarEmpty: {
+    backgroundColor: "#E3E3E3",
+  },
+  deliveryInfoContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "transparent",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E3E3E3",
+    paddingLeft: 12,
+    paddingVertical: 10.5,
+    marginTop: 16,
+  },
+  bikeIconContainer: {
+    backgroundColor: "transparent",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E3E3E3",
+    padding: 6,
+  },
+  bikeIcon: {
+    width: 44,
+    height: 44,
+  },
+  deliveryTextWrapper: {
+    width: 243,
+  },
+  deliveryInfoTitle: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+    lineHeight: 21,
+    textAlign: "left",
+  },
+  deliveryInfoDescription: {
+    fontSize: 12,
+    fontFamily: "Sora-Light",
+    color: "#A2A2A2",
+    lineHeight: 18,
+    textAlign: "left",
+    marginTop: 4,
+  },
+  courierContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 14,
+  },
+  courierInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  courierImage: {
+    width: 56,
+    height: 56,
+    borderRadius: 14,
+  },
+  courierTextWrapper: {
+    width: 135,
+  },
+  courierName: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+    lineHeight: 21,
+  },
+  courierRole: {
+    fontSize: 12,
+    fontFamily: "Sora",
+    color: "#A2A2A2",
+    lineHeight: 14.4,
+    marginTop: 4,
+  },
+  phoneIconContainer: {
+    borderRadius: 12,
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: "#E3E3E3",
+    padding: 10,
+  },
+  phoneIcon: {
+    width: 24,
+    height: 24,
+  },
+});

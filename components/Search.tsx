@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Image, TextInput } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  StyleSheet,
+} from "react-native";
 import { useDebouncedCallback } from "use-debounce";
-
 import icons from "@/constants/icons";
 import { useLocalSearchParams, router, usePathname } from "expo-router";
 
@@ -20,26 +25,66 @@ const Search = () => {
   };
 
   return (
-    <View
-      style={{ width: "100%" }}
-      className="flex flex-row items-center justify-between gap-4 w-full mt-5 py-2"
-    >
-      <View className="flex-1 bg-[#2A2A2A] rounded-[12px] flex flex-row gap-2 items-center justify-start p-4 z-50">
-        <Image source={icons.Search} className="size-5" />
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
+        <Image source={icons.Search} style={styles.searchIcon} />
         <TextInput
           value={search}
           onChangeText={handleSearch}
           placeholder="Search coffee"
           placeholderTextColor="#ACACAC"
-          className="text-sm font-Sora rounded-[12px] leading-[120%] text-white flex-1 outline-none"
+          style={styles.input}
         />
       </View>
-
-      <TouchableOpacity className="bg-primary p-4 rounded-[12px]">
-        <Image source={icons.Filter} className="size-5" />
+      <TouchableOpacity style={styles.filterButton}>
+        <Image source={icons.Filter} style={styles.filterIcon} />
       </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 16,
+    marginTop: 20,
+    paddingVertical: 8,
+  },
+  searchContainer: {
+    flex: 1,
+    backgroundColor: "#2A2A2A",
+    borderRadius: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    padding: 16,
+    zIndex: 50,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
+  },
+  input: {
+    fontSize: 14,
+    fontFamily: "Sora",
+    borderRadius: 12,
+    lineHeight: 16.8,
+    color: "white",
+    flex: 1,
+    outline: "none",
+  },
+  filterButton: {
+    backgroundColor: "#ED5151",
+    padding: 16,
+    borderRadius: 12,
+  },
+  filterIcon: {
+    width: 20,
+    height: 20,
+  },
+});
 
 export default Search;

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Pressable,
   Animated,
+  StyleSheet,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { router, useLocalSearchParams } from "expo-router";
@@ -46,71 +47,71 @@ const Order = () => {
       }),
     ]).start();
   }, [method]);
+
   return (
-    <SafeAreaView className="flex flex-1 bg-[#F9F9F9]">
-      <ScrollView className="flex flex-1 px-6 py-8 pb-[100px]">
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.scrollView}>
         {/* Top part */}
-        <View className="flex flex-row justify-between items-center">
-          <TouchableOpacity className="p-[10px]" onPress={() => router.back()}>
+        <View style={styles.topContainer}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
             <Image
               source={icons.Left}
               resizeMode="contain"
-              className="w-6 h-6"
+              style={styles.icon}
             />
           </TouchableOpacity>
-          <Text className="text-black font-Sora-semibold text-[1rem] leading-[120%] tracking-[0%]">
-            Order
-          </Text>
-          <TouchableOpacity className="p-[10px]">
+          <Text style={styles.title}>Order</Text>
+          <TouchableOpacity style={styles.likeButton}>
             <Image
               source={icons.Like}
               resizeMode="contain"
-              className="w-6 h-6"
+              style={styles.icon}
             />
           </TouchableOpacity>
         </View>
 
         {/* Slider */}
-        <View className="flex p-1 bg-[#EDEDED] rounded-[12px] mt-8">
-          <View className="relative flex flex-1 flex-row items-center justify-between rounded-[12px] gap-1">
+        <View style={styles.sliderContainer}>
+          <View style={styles.sliderInnerContainer}>
             <Pressable
-              className="flex-1 px-12 py-2 rounded-[8px] bg-transparent"
+              style={styles.sliderButton}
               onPress={() => setMethod("Deliver")}
             >
               <Animated.Text
-                style={{
-                  color: deliverTextOpacity.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ["#313131", "#FFFFFF"],
-                  }),
-                  width: 70,
-                  fontSize: 16,
-                  fontFamily:
-                    method === "Deliver" ? "Sora-SemiBold" : "Sora-Regular",
-                  lineHeight: 19.6,
-                  textAlign: "center",
-                }}
+                style={[
+                  styles.sliderButtonText,
+                  {
+                    color: deliverTextOpacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ["#313131", "#FFFFFF"],
+                    }),
+                    fontFamily:
+                      method === "Deliver" ? "Sora-SemiBold" : "Sora-Regular",
+                  },
+                ]}
               >
                 Deliver
               </Animated.Text>
             </Pressable>
             <Pressable
-              className="flex-1 px-12 py-2 rounded-[8px] bg-transparent"
+              style={styles.sliderButton}
               onPress={() => setMethod("Pickup")}
             >
               <Animated.Text
-                style={{
-                  color: pickupTextOpacity.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ["#313131", "#FFFFFF"],
-                  }),
-                  width: 70,
-                  fontSize: 16,
-                  fontFamily:
-                    method === "Pickup" ? "Sora-SemiBold" : "Sora-Regular",
-                  lineHeight: 19.6,
-                  textAlign: "center",
-                }}
+                style={[
+                  styles.sliderButtonText,
+                  {
+                    color: pickupTextOpacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ["#313131", "#FFFFFF"],
+                    }),
+                    fontFamily:
+                      method === "Pickup" ? "Sora-SemiBold" : "Sora-Regular",
+                  },
+                ]}
               >
                 Pick Up
               </Animated.Text>
@@ -118,22 +119,19 @@ const Order = () => {
 
             {/* Animated Slider */}
             <Animated.View
-              style={{
-                position: "absolute",
-                height: "100%",
-                width: "50%", // Match the width of the buttons
-                backgroundColor: "#C67C4E", // Primary color
-                borderRadius: 8,
-                zIndex: -1,
-                transform: [
-                  {
-                    translateX: translateX.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: ["0%", "100%"], // Use numeric values for translation
-                    }),
-                  },
-                ],
-              }}
+              style={[
+                styles.sliderBackground,
+                {
+                  transform: [
+                    {
+                      translateX: translateX.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 100], // Use numeric values for translation
+                      }),
+                    },
+                  ],
+                },
+              ]}
             />
           </View>
         </View>
@@ -146,44 +144,28 @@ const Order = () => {
       </ScrollView>
 
       {/* Coffee Price */}
-      <View
-        style={{ minHeight: 119, width: "100%" }}
-        className="fixed bottom-0 z-20 flex rounded-t-[16px] items-center justify-between bg-white py-4 px-6"
-      >
-        <View
-          style={{ width: "100%" }}
-          className="flex flex-row items-center justify-between"
-        >
-          <View className="flex flex-row gap-4 items-center">
-            <Image source={icons.Wallet} style={{ width: 20, height: 20 }} />
+      <View style={styles.priceContainer}>
+        <View style={styles.paymentMethodContainer}>
+          <View style={styles.paymentMethod}>
+            <Image source={icons.Wallet} style={styles.walletIcon} />
             <View>
-              <Text className="text-sm font-Sora-semibold text-black leading-[120%]">
-                Cash/Wallet
-              </Text>
-              <Text className="text-xs font-Sora-semibold text-primary leading-[150%]">
-                $5.53
-              </Text>
+              <Text style={styles.paymentMethodText}>Cash/Wallet</Text>
+              <Text style={styles.paymentMethodAmount}>$5.53</Text>
             </View>
           </View>
           <Image
             source={icons.Down}
             resizeMode="contain"
-            style={{ width: 20, height: 20 }}
+            style={styles.downIcon}
           />
         </View>
         <TouchableOpacity
-          style={{ width: "100%" }}
-          className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
+          style={styles.orderButton}
           onPress={() => {
             router.push("/(order)/delivery");
           }}
         >
-          <Text
-            style={{ width: 49 }}
-            className="text-white text-base font-Sora-semibold leading-[150%] tracking-0"
-          >
-            Order
-          </Text>
+          <Text style={styles.orderButtonText}>Order</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -199,62 +181,52 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
   const calculatedPrice = (Number(price) * count).toFixed(2);
 
   return (
-    <View className="flex flex-1 pb-[100px]">
+    <View style={styles.deliverContainer}>
       {/* Top part */}
-      <View className="mt-6">
-        <Text className="text-base font-Sora-semibold leading-[150%] tracking-0 text-black">
-          Deliver Address
-        </Text>
-        <Text className="text-sm font-Sora-semibold leading-[150%] tracking-0 text-black mt-4">
-          Paul M. Valley
-        </Text>
-        <Text className="text-xs font-Sora leading-[150%] tracking-0 text-lightGrey mt-1">
+      <View style={styles.addressContainer}>
+        <Text style={styles.addressTitle}>Deliver Address</Text>
+        <Text style={styles.addressName}>Paul M. Valley</Text>
+        <Text style={styles.addressDetails}>
           1235 Amsterdam Ave, Apt 4B, New York, NY 10027
         </Text>
 
         {/* Edit Address */}
-        <View className="flex flex-row items-center justify-start gap-2 mt-4">
-          <View className="flex flex-row items-center gap-1 py-[6px] px-3 bg-white border border-lightGrey rounded-[16px]">
+        <View style={styles.editAddressContainer}>
+          <View style={styles.editButton}>
             <Image
               source={icons.Edit}
               resizeMode="contain"
-              style={{ width: 14, height: 14 }}
+              style={styles.editIcon}
             />
             <Text>Edit Address</Text>
           </View>
-          <View className="flex flex-row items-center gap-1 py-[6px] px-3 bg-white border border-lightGrey rounded-[16px]">
+          <View style={styles.editButton}>
             <Image
               source={icons.Note}
               resizeMode="contain"
-              style={{ width: 14, height: 14 }}
+              style={styles.editIcon}
             />
             <Text>Add Note</Text>
           </View>
         </View>
 
         {/* Divider */}
-        <View className="flex flex-1 items-center justify-center mt-4">
-          <View style={{ width: "90%", height: 1 }} className="bg-[#E3E3E3]" />
-        </View>
+        <View style={styles.divider} />
       </View>
       {/* Middle Part */}
-      <View className="flex flex-row items-center justify-between mt-4">
-        <View className="flex flex-row items-center gap-4">
+      <View style={styles.coffeeDetailsContainer}>
+        <View style={styles.coffeeInfo}>
           <Image
             source={coffee?.image}
-            style={{ width: 54, height: 54, borderRadius: 8 }}
+            style={styles.coffeeImage}
             resizeMode="cover"
           />
           <View>
-            <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              {coffee?.name}
-            </Text>
-            <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
-              {coffee?.category}
-            </Text>
+            <Text style={styles.coffeeName}>{coffee?.name}</Text>
+            <Text style={styles.coffeeCategory}>{coffee?.category}</Text>
           </View>
         </View>
-        <View className="flex flex-row items-center gap-[18px]">
+        <View style={styles.quantityContainer}>
           <TouchableOpacity
             onPress={() => {
               if (count > 1) {
@@ -264,68 +236,52 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           >
             <Image
               source={count === 1 ? images.MinusFaded : images.Minus}
-              style={{ width: 24, height: 24 }}
+              style={styles.quantityIcon}
             />
           </TouchableOpacity>
-          <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-            {count}
-          </Text>
+          <Text style={styles.quantityText}>{count}</Text>
           <TouchableOpacity
             onPress={() => {
               setCount(count + 1);
             }}
           >
-            <Image source={images.Plus} style={{ width: 24, height: 24 }} />
+            <Image source={images.Plus} style={styles.quantityIcon} />
           </TouchableOpacity>
         </View>
       </View>
       {/* Brown Line */}
-      <View className="flex flex-1 mt-4" />
+      <View style={styles.brownLine} />
 
       {/* Payment Section */}
       <View>
-        <View className="mt-4 px-4 py-[18px] flex flex-row items-center justify-between bg-white rounded-[16px] border border-[#EDEDED]">
-          <View className="flex flex-row gap-4 items-center">
+        <View style={styles.discountContainer}>
+          <View style={styles.discountInfo}>
             <Image
               source={icons.Discount}
               resizeMode="contain"
-              style={{ width: 20, height: 20 }}
+              style={styles.discountIcon}
             />
-            <Text className="text-black text-sm font-Sora-semibold leading-[150%] tracking-0">
-              1 Discount is Applied
-            </Text>
+            <Text style={styles.discountText}>1 Discount is Applied</Text>
           </View>
           <Image
             source={icons.Right}
             resizeMode="contain"
-            style={{ width: 20, height: 20 }}
+            style={styles.rightIcon}
           />
         </View>
         {/* Payment Summary */}
-        <View className="mt-6">
-          <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-            Payment Summary
-          </Text>
+        <View style={styles.paymentSummaryContainer}>
+          <Text style={styles.paymentSummaryTitle}>Payment Summary</Text>
 
-          <View className="flex flex-row items-center justify-between mt-4">
-            <Text className="text-sm font-Sora text-black leading-[150%] tracking-0">
-              Price
-            </Text>
-            <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-              {calculatedPrice}
-            </Text>
+          <View style={styles.paymentSummaryItem}>
+            <Text style={styles.paymentSummaryLabel}>Price</Text>
+            <Text style={styles.paymentSummaryValue}>{calculatedPrice}</Text>
           </View>
-          <View className="flex flex-row items-center justify-between mt-2">
-            <Text className="text-sm font-Sora text-black leading-[150%] tracking-0">
-              Delivery Fee
-            </Text>
-            <View className="flex flex-row items-center gap-2">
-              <Text className="text-sm font-Sora-semibold text-black leading-[150%] line-through tracking-0">
-                $ 2.0
-              </Text>
-              <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-                $1.0
-              </Text>
+          <View style={styles.paymentSummaryItem}>
+            <Text style={styles.paymentSummaryLabel}>Delivery Fee</Text>
+            <View style={styles.deliveryFeeContainer}>
+              <Text style={styles.deliveryFeeStriked}>$ 2.0</Text>
+              <Text style={styles.deliveryFee}>$1.0</Text>
             </View>
           </View>
         </View>
@@ -341,63 +297,54 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
   // Find the coffee by id
   const coffee = coffees.find((c) => c.id === Number(id));
   const calculatedPrice = (Number(price) * count).toFixed(2);
+
   return (
-    <View className="flex flex-1 pb-[100px]">
+    <View style={styles.pickupContainer}>
       {/* Top part */}
-      <View className="mt-6">
-        <Text className="text-base font-Sora-semibold leading-[150%] tracking-0 text-black">
-          Pickup Address
-        </Text>
-        <Text className="text-sm font-Sora-semibold leading-[150%] tracking-0 text-black mt-4">
-          Paul M. Valley
-        </Text>
-        <Text className="text-xs font-Sora leading-[150%] tracking-0 text-lightGrey mt-1">
+      <View style={styles.addressContainer}>
+        <Text style={styles.addressTitle}>Pickup Address</Text>
+        <Text style={styles.addressName}>Paul M. Valley</Text>
+        <Text style={styles.addressDetails}>
           456 W 37th St, Apt 9C, New York, NY 10018
         </Text>
 
         {/* Edit Address */}
-        <View className="flex flex-row items-center justify-start gap-2 mt-4">
-          <View className="flex flex-row items-center gap-1 py-[6px] px-3 bg-white border border-lightGrey rounded-[16px]">
+        <View style={styles.editAddressContainer}>
+          <View style={styles.editButton}>
             <Image
               source={icons.Edit}
               resizeMode="contain"
-              style={{ width: 14, height: 14 }}
+              style={styles.editIcon}
             />
             <Text>Edit Address</Text>
           </View>
-          <View className="flex flex-row items-center gap-1 py-[6px] px-3 bg-white border border-lightGrey rounded-[16px]">
+          <View style={styles.editButton}>
             <Image
               source={icons.Note}
               resizeMode="contain"
-              style={{ width: 14, height: 14 }}
+              style={styles.editIcon}
             />
             <Text>Add Note</Text>
           </View>
         </View>
 
         {/* Divider */}
-        <View className="flex flex-1 items-center justify-center mt-4">
-          <View style={{ width: "90%", height: 1 }} className="bg-[#E3E3E3]" />
-        </View>
+        <View style={styles.divider} />
       </View>
       {/* Middle Part */}
-      <View className="flex flex-row items-center justify-between mt-4">
-        <View className="flex flex-row items-center gap-4">
+      <View style={styles.coffeeDetailsContainer}>
+        <View style={styles.coffeeInfo}>
           <Image
             source={coffee?.image}
-            style={{ width: 54, height: 54, borderRadius: 8 }}
+            style={styles.coffeeImage}
             resizeMode="cover"
           />
           <View>
-            <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-              {coffee?.name}
-            </Text>
-            <Text className="text-xs font-Sora text-lightGrey leading-[120%] tracking-0">
-              {coffee?.category}
-            </Text>
+            <Text style={styles.coffeeName}>{coffee?.name}</Text>
+            <Text style={styles.coffeeCategory}>{coffee?.category}</Text>
           </View>
         </View>
-        <View className="flex flex-row items-center gap-[18px]">
+        <View style={styles.quantityContainer}>
           <TouchableOpacity
             onPress={() => {
               if (count > 1) {
@@ -407,61 +354,340 @@ const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
           >
             <Image
               source={count === 1 ? images.MinusFaded : images.Minus}
-              style={{ width: 24, height: 24 }}
+              style={styles.quantityIcon}
             />
           </TouchableOpacity>
-          <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-            {count}
-          </Text>
+          <Text style={styles.quantityText}>{count}</Text>
           <TouchableOpacity
             onPress={() => {
               setCount(count + 1);
             }}
           >
-            <Image source={images.Plus} style={{ width: 24, height: 24 }} />
+            <Image source={images.Plus} style={styles.quantityIcon} />
           </TouchableOpacity>
         </View>
       </View>
       {/* Brown Line */}
-      <View className="flex flex-1 mt-4" />
+      <View style={styles.brownLine} />
 
       {/* Payment Section */}
       <View>
-        <View className="mt-4 px-4 py-[18px] flex flex-row items-center justify-between bg-white rounded-[16px] border border-[#EDEDED]">
-          <View className="flex flex-row gap-4 items-center">
+        <View style={styles.discountContainer}>
+          <View style={styles.discountInfo}>
             <Image
               source={icons.Discount}
               resizeMode="contain"
-              style={{ width: 20, height: 20 }}
+              style={styles.discountIcon}
             />
-            <Text className="text-black text-sm font-Sora-semibold leading-[150%] tracking-0">
-              Add a Voucher
-            </Text>
+            <Text style={styles.discountText}>Add a Voucher</Text>
           </View>
           <Image
             source={icons.Right}
             resizeMode="contain"
-            style={{ width: 20, height: 20 }}
+            style={styles.rightIcon}
           />
         </View>
         {/* Payment Summary */}
-        <View className="mt-6">
-          <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
-            Payment Summary
-          </Text>
+        <View style={styles.paymentSummaryContainer}>
+          <Text style={styles.paymentSummaryTitle}>Payment Summary</Text>
 
-          <View className="flex flex-row items-center justify-between mt-4">
-            <Text className="text-sm font-Sora text-black leading-[150%] tracking-0">
-              Price
-            </Text>
-            <Text className="text-sm font-Sora-semibold text-black leading-[150%] tracking-0">
-              {calculatedPrice}
-            </Text>
+          <View style={styles.paymentSummaryItem}>
+            <Text style={styles.paymentSummaryLabel}>Price</Text>
+            <Text style={styles.paymentSummaryValue}>{calculatedPrice}</Text>
           </View>
         </View>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#F9F9F9",
+  },
+  scrollView: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 32,
+    paddingBottom: 100,
+  },
+  topContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  backButton: {
+    padding: 10,
+  },
+  title: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  likeButton: {
+    padding: 10,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  sliderContainer: {
+    backgroundColor: "#EDEDED",
+    borderRadius: 12,
+    marginTop: 32,
+    padding: 4,
+  },
+  sliderInnerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius: 12,
+    position: "relative",
+  },
+  sliderButton: {
+    flex: 1,
+    paddingHorizontal: 48,
+    paddingVertical: 8,
+    borderRadius: 8,
+    backgroundColor: "transparent",
+  },
+  sliderButtonText: {
+    fontSize: 16,
+    lineHeight: 19.6,
+    textAlign: "center",
+  },
+  sliderBackground: {
+    position: "absolute",
+    height: "100%",
+    width: "50%",
+    backgroundColor: "#C67C4E",
+    borderRadius: 8,
+    zIndex: -1,
+  },
+  priceContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    minHeight: 119,
+    backgroundColor: "white",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+  },
+  paymentMethodContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  paymentMethod: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  walletIcon: {
+    width: 20,
+    height: 20,
+  },
+  paymentMethodText: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  paymentMethodAmount: {
+    fontSize: 12,
+    fontFamily: "Sora-Semibold",
+    color: "#ED5151",
+  },
+  downIcon: {
+    width: 20,
+    height: 20,
+  },
+  orderButton: {
+    width: "100%",
+    marginTop: 24,
+    paddingVertical: 16,
+    borderRadius: 16,
+    backgroundColor: "#ED5151",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  orderButtonText: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "white",
+  },
+  deliverContainer: {
+    flex: 1,
+    paddingBottom: 100,
+  },
+  addressContainer: {
+    marginTop: 24,
+  },
+  addressTitle: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  addressName: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+    marginTop: 16,
+  },
+  addressDetails: {
+    fontSize: 12,
+    fontFamily: "Sora",
+    color: "#A2A2A2",
+    marginTop: 4,
+  },
+  editAddressContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 16,
+  },
+  editButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "#E3E3E3",
+    borderRadius: 16,
+  },
+  editIcon: {
+    width: 14,
+    height: 14,
+  },
+  divider: {
+    width: "90%",
+    height: 1,
+    backgroundColor: "#E3E3E3",
+    marginTop: 16,
+  },
+  coffeeDetailsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  coffeeInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  coffeeImage: {
+    width: 54,
+    height: 54,
+    borderRadius: 8,
+  },
+  coffeeName: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  coffeeCategory: {
+    fontSize: 12,
+    fontFamily: "Sora",
+    color: "#A2A2A2",
+  },
+  quantityContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 18,
+  },
+  quantityIcon: {
+    width: 24,
+    height: 24,
+  },
+  quantityText: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  brownLine: {
+    flex: 1,
+    marginTop: 16,
+  },
+  discountContainer: {
+    marginTop: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#EDEDED",
+  },
+  discountInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  discountIcon: {
+    width: 20,
+    height: 20,
+  },
+  discountText: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  rightIcon: {
+    width: 20,
+    height: 20,
+  },
+  paymentSummaryContainer: {
+    marginTop: 24,
+  },
+  paymentSummaryTitle: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  paymentSummaryItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  paymentSummaryLabel: {
+    fontSize: 14,
+    fontFamily: "Sora",
+    color: "black",
+  },
+  paymentSummaryValue: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  deliveryFeeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  deliveryFeeStriked: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+    textDecorationLine: "line-through",
+  },
+  deliveryFee: {
+    fontSize: 14,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  pickupContainer: {
+    flex: 1,
+    paddingBottom: 100,
+  },
+});
 
 export default Order;

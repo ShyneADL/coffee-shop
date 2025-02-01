@@ -5,6 +5,7 @@ import {
   ScrollView,
   Image,
   ImageSourcePropType,
+  StyleSheet,
 } from "react-native";
 import React from "react";
 import images from "@/constants/images";
@@ -26,57 +27,31 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
   rating,
 }) => {
   return (
-    <View
-      style={{ width: 156 }}
-      className="flex gap-2 bg-white px-2 pt-2 pb-3 overflow-hidden rounded-[16px]"
-    >
+    <View style={styles.container}>
       {/* Image */}
-      <View style={{ width: "100%" }} className="relative rounded-[12px]">
-        <Image
-          source={image}
-          style={{ width: "100%", height: 128 }}
-          className="rounded-[12px] z-[1]"
-          resizeMode="cover"
-        />
-        <View className="absolute top-2 right-[14px] flex flex-row items-center gap-[2px] z-[20]">
+      <View style={styles.imageContainer}>
+        <Image source={image} style={styles.image} resizeMode="cover" />
+        <View style={styles.ratingContainer}>
           <Image
             source={images.Star}
             resizeMode="contain"
-            style={{ width: 10, height: 10 }}
-            className="w-[10px] h-[10px]"
+            style={styles.starIcon}
           />
-          <Text className="font-Sora-semibold text-[0.5rem] leading-[150%] text-white">
-            {rating}
-          </Text>
+          <Text style={styles.ratingText}>{rating}</Text>
         </View>
       </View>
-      <View className="flex gap-2">
-        <View className="flex gap-1">
-          <Text
-            style={{ width: 103 }}
-            className="font-Sora-semibold text-[1rem] text-[#242424] leading-[150%] tracking-0 "
-          >
-            {title}
-          </Text>
-          <Text
-            style={{ width: 103 }}
-            className="font-Sora text-[0.75rem] text-[#A2A2A2] leading-[120%] tracking-0"
-          >
-            {category}
-          </Text>
+      <View style={styles.detailsContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>{title}</Text>
+          <Text style={styles.categoryText}>{category}</Text>
         </View>
-        <View
-          style={{ width: "100%" }}
-          className="flex flex-row justify-between items-center"
-        >
-          <Text className="font-Sora-semibold text-[1.125rem] leading-[150%] tracking-0 w-fit">
-            $ {price}
-          </Text>
-          <View className="rounded-[8px] p-2 bg-primary flex items-center justify-center">
+        <View style={styles.priceContainer}>
+          <Text style={styles.priceText}>$ {price}</Text>
+          <View style={styles.addButton}>
             <Image
               source={icons.Add}
               resizeMode="contain"
-              className="w-[32px] h-[32px]"
+              style={styles.addIcon}
             />
           </View>
         </View>
@@ -84,5 +59,89 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: 156,
+    gap: 8,
+    backgroundColor: "white",
+    paddingHorizontal: 8,
+    paddingTop: 8,
+    paddingBottom: 12,
+    borderRadius: 16,
+    overflow: "hidden",
+  },
+  imageContainer: {
+    width: "100%",
+    position: "relative",
+    borderRadius: 12,
+  },
+  image: {
+    width: "100%",
+    height: 128,
+    borderRadius: 12,
+    zIndex: 1,
+  },
+  ratingContainer: {
+    position: "absolute",
+    top: 8,
+    right: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+    zIndex: 20,
+  },
+  starIcon: {
+    width: 10,
+    height: 10,
+  },
+  ratingText: {
+    fontFamily: "Sora-Semibold",
+    fontSize: 10,
+    color: "white",
+  },
+  detailsContainer: {
+    gap: 8,
+  },
+  textContainer: {
+    gap: 4,
+  },
+  titleText: {
+    width: 103,
+    fontFamily: "Sora-Semibold",
+    fontSize: 16,
+    color: "#242424",
+    lineHeight: 24,
+  },
+  categoryText: {
+    width: 103,
+    fontFamily: "Sora",
+    fontSize: 12,
+    color: "#A2A2A2",
+    lineHeight: 14.4,
+  },
+  priceContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  priceText: {
+    fontFamily: "Sora-Semibold",
+    fontSize: 18,
+    lineHeight: 27,
+  },
+  addButton: {
+    borderRadius: 8,
+    padding: 8,
+    backgroundColor: "#ED5151",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addIcon: {
+    width: 32,
+    height: 32,
+  },
+});
 
 export default CoffeeCard;

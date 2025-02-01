@@ -1,10 +1,16 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import { coffees } from "@/constants/coffee";
 
 const Detail = () => {
@@ -30,25 +36,26 @@ const Detail = () => {
   const currentPrice = calculatePrice();
 
   return (
-    <SafeAreaView className="relative flex flex-1 bg-[#F9F9F9]">
-      <ScrollView className="flex flex-1 px-6 py-8 pb-[100px]">
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.scrollView}>
         {/* Top part */}
-        <View className="flex flex-row flex-1 justify-between items-center">
-          <TouchableOpacity className="p-[10px]" onPress={() => router.back()}>
+        <View style={styles.topContainer}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
             <Image
               source={icons.Left}
               resizeMode="contain"
-              className="w-6 h-6"
+              style={styles.icon}
             />
           </TouchableOpacity>
-          <Text className="text-black font-Sora-semibold text-[1rem] leading-[120%] tracking-[0%]">
-            Details
-          </Text>
-          <TouchableOpacity className="p-[10px]">
+          <Text style={styles.detailsText}>Details</Text>
+          <TouchableOpacity style={styles.likeButton}>
             <Image
               source={icons.Like}
               resizeMode="contain"
-              className="w-6 h-6"
+              style={styles.icon}
             />
           </TouchableOpacity>
         </View>
@@ -57,118 +64,104 @@ const Detail = () => {
         <Image
           source={coffee?.image}
           resizeMode="cover"
-          style={{
-            width: "100%",
-            height: 202,
-            aspectRatio: "8:5",
-          }}
-          className="mt-8 rounded-[16px]"
+          style={styles.coffeeImage}
         />
 
         {/* Coffee Details */}
-        <View className="flex flex-row items-center justify-between mt-4">
+        <View style={styles.coffeeDetailsContainer}>
           <View>
-            <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
+            <Text style={styles.coffeeName}>
               {coffee?.name || "Coffee Title"}
             </Text>
-            <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%] mt-1">
+            <Text style={styles.coffeeCategory}>
               {coffee?.category || "Coffee Category"}
             </Text>
-            <View className="flex flex-row gap-1 mt-4">
+            <View style={styles.ratingContainer}>
               <Image
                 source={images.Star}
                 resizeMode="contain"
-                style={{ width: 20, height: 20 }}
-                className="size-5"
+                style={styles.starIcon}
               />
-              <View className="flex items-center flex-row">
-                <Text className="font-Sora-semibold text-[1rem] text-black">
-                  {coffee?.rating || "0"}
-                </Text>
-                <Text className="font-Sora text-[0.75rem] text-lightGrey ml-[4px]">
-                  (230)
-                </Text>
+              <View style={styles.ratingTextContainer}>
+                <Text style={styles.ratingText}>{coffee?.rating || "0"}</Text>
+                <Text style={styles.ratingCount}>(230)</Text>
               </View>
             </View>
           </View>
-          <View className="flex flex-row items-center gap-3">
-            <View className="bg-alt-grey rounded-[12px] p-[10px]">
-              <Image source={images.Bike} style={{ width: 24, height: 24 }} />
+          <View style={styles.iconsContainer}>
+            <View style={styles.iconWrapper}>
+              <Image source={images.Bike} style={styles.icon} />
             </View>
-            <View className="bg-alt-grey rounded-[12px] p-[10px]">
-              <Image source={images.Bean} style={{ width: 24, height: 24 }} />
+            <View style={styles.iconWrapper}>
+              <Image source={images.Bean} style={styles.icon} />
             </View>
-            <View className="bg-alt-grey rounded-[12px] p-[10px]">
-              <Image source={images.Milk} style={{ width: 24, height: 24 }} />
+            <View style={styles.iconWrapper}>
+              <Image source={images.Milk} style={styles.icon} />
             </View>
           </View>
         </View>
 
         {/* Divider */}
-        <View className="flex flex-1 items-center justify-center mt-4">
-          <View style={{ width: "90%", height: 1 }} className="bg-[#E3E3E3]" />
+        <View style={styles.dividerContainer}>
+          <View style={styles.divider} />
         </View>
 
         {/* Coffee Description */}
-        <View className="mt-4">
-          <Text className="font-Sora-semibold text-[1rem] text-black leading-[150%] trracking-[0%]">
-            Description
-          </Text>
-          <Text className="text-lightGrey font-Sora-light text-[0.875rem] leading-[150%] mt-2">
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionTitle}>Description</Text>
+          <Text style={styles.descriptionText}>
             {coffee?.description || "No description available."}
           </Text>
         </View>
 
         {/* Coffee Size */}
-        <View className="mt-6">
-          <Text className="font-Sora-semibold text-[1rem] text-black leading-[150%] trracking-[0%]">
-            Size
-          </Text>
-          <View className="flex flex-row items-center justify-between overflow-hidden gap-4 mt-4">
+        <View style={styles.sizeContainer}>
+          <Text style={styles.sizeTitle}>Size</Text>
+          <View style={styles.sizeButtonsContainer}>
             <TouchableOpacity
-              className={`py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
-                activeSize === "S"
-                  ? "bg-primary-100 border-primary"
-                  : "bg-white border-[#E3E3E3]"
-              }`}
+              style={[
+                styles.sizeButton,
+                activeSize === "S" && styles.activeSizeButton,
+              ]}
               onPress={() => setActiveSize("S")}
             >
               <Text
-                className={`font-Sora text-sm leading-[150%] ${
-                  activeSize === "S" ? "text-primary" : "text-black"
-                }`}
+                style={[
+                  styles.sizeButtonText,
+                  activeSize === "S" && styles.activeSizeButtonText,
+                ]}
               >
                 S
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={`py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
-                activeSize === "M"
-                  ? "bg-primary-100 border-primary"
-                  : "bg-white border-[#E3E3E3]"
-              }`}
+              style={[
+                styles.sizeButton,
+                activeSize === "M" && styles.activeSizeButton,
+              ]}
               onPress={() => setActiveSize("M")}
             >
               <Text
-                className={`font-Sora text-sm leading-[150%] ${
-                  activeSize === "M" ? "text-primary" : "text-black"
-                }`}
+                style={[
+                  styles.sizeButtonText,
+                  activeSize === "M" && styles.activeSizeButtonText,
+                ]}
               >
                 M
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={`py-[10px] rounded-[12px] flex flex-1 items-center justify-center border ${
-                activeSize === "L"
-                  ? "bg-primary-100 border-primary"
-                  : "bg-white border-[#E3E3E3]"
-              }`}
+              style={[
+                styles.sizeButton,
+                activeSize === "L" && styles.activeSizeButton,
+              ]}
               onPress={() => setActiveSize("L")}
             >
               <Text
-                className={`font-Sora text-sm leading-[150%] ${
-                  activeSize === "L" ? "text-primary" : "text-black"
-                }`}
+                style={[
+                  styles.sizeButtonText,
+                  activeSize === "L" && styles.activeSizeButtonText,
+                ]}
               >
                 L
               </Text>
@@ -178,20 +171,13 @@ const Detail = () => {
       </ScrollView>
 
       {/* Coffee Price */}
-      <View
-        style={{ minHeight: 84, width: "100%" }}
-        className="fixed bottom-0 z-20 flex rounded-t-[16px] gap-[34px] flex-row items-center justify-between bg-white pt-4 px-6 pb-[46px]"
-      >
-        <View className="mt-6">
-          <Text className="font-Sora text-[#909090] text-sm leading-[120%] tracking-[0]">
-            Price
-          </Text>
-          <Text className="text-primary font-Sora-semibold text-[1.25rem] leading-[150%] mt-1">
-            $ {currentPrice.toFixed(2)}
-          </Text>
+      <View style={styles.priceContainer}>
+        <View>
+          <Text style={styles.priceLabel}>Price</Text>
+          <Text style={styles.priceValue}>$ {currentPrice.toFixed(2)}</Text>
         </View>
         <TouchableOpacity
-          className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
+          style={styles.buyNowButton}
           onPress={() => {
             router.push({
               pathname: "/(order)/order",
@@ -203,16 +189,204 @@ const Detail = () => {
             });
           }}
         >
-          <Text
-            style={{ width: 73 }}
-            className="text-white text-base font-Sora-semibold leading-[150%] tracking-0"
-          >
-            Buy Now
-          </Text>
+          <Text style={styles.buyNowText}>Buy Now</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#F9F9F9",
+  },
+  scrollView: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 32,
+    paddingBottom: 100,
+  },
+  topContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  backButton: {
+    padding: 10,
+  },
+  detailsText: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  likeButton: {
+    padding: 10,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  coffeeImage: {
+    width: "100%",
+    height: 202,
+    aspectRatio: 8 / 5,
+    marginTop: 32,
+    borderRadius: 16,
+  },
+  coffeeDetailsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  coffeeName: {
+    fontSize: 20,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  coffeeCategory: {
+    fontSize: 12,
+    fontFamily: "Sora",
+    color: "#A2A2A2",
+    marginTop: 4,
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginTop: 16,
+  },
+  starIcon: {
+    width: 20,
+    height: 20,
+  },
+  ratingTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ratingText: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  ratingCount: {
+    fontSize: 12,
+    fontFamily: "Sora",
+    color: "#A2A2A2",
+    marginLeft: 4,
+  },
+  iconsContainer: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  iconWrapper: {
+    backgroundColor: "#F0F0F0",
+    borderRadius: 12,
+    padding: 10,
+  },
+  dividerContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 16,
+  },
+  divider: {
+    width: "90%",
+    height: 1,
+    backgroundColor: "#E3E3E3",
+  },
+  descriptionContainer: {
+    marginTop: 16,
+  },
+  descriptionTitle: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  descriptionText: {
+    fontSize: 14,
+    fontFamily: "Sora-Light",
+    color: "#A2A2A2",
+    marginTop: 8,
+  },
+  sizeContainer: {
+    marginTop: 24,
+  },
+  sizeTitle: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "black",
+  },
+  sizeButtonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 16,
+    marginTop: 16,
+  },
+  sizeButton: {
+    flex: 1,
+    paddingVertical: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E3E3E3",
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeSizeButton: {
+    backgroundColor: "#EDEDED",
+    borderColor: "#ED5151",
+  },
+  sizeButtonText: {
+    fontSize: 14,
+    fontFamily: "Sora",
+    color: "black",
+  },
+  activeSizeButtonText: {
+    color: "#ED5151",
+  },
+  priceContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    minHeight: 84,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "white",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 46,
+  },
+  priceLabel: {
+    fontSize: 14,
+    fontFamily: "Sora",
+    color: "#909090",
+  },
+  priceValue: {
+    fontSize: 20,
+    fontFamily: "Sora-Semibold",
+    color: "#ED5151",
+    marginTop: 4,
+  },
+  buyNowButton: {
+    flex: 1,
+    marginTop: 24,
+    paddingVertical: 16,
+    borderRadius: 16,
+    backgroundColor: "#ED5151",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buyNowText: {
+    fontSize: 16,
+    fontFamily: "Sora-Semibold",
+    color: "white",
+  },
+});
 
 export default Detail;
