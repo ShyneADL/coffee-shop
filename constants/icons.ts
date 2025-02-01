@@ -1,39 +1,22 @@
-import Bag from "../assets/icons/bag.svg";
-import Home from "../assets/icons/home.svg";
-import Discount from "../assets/icons/discount.svg";
-import Filter from "../assets/icons/filter.svg";
-import Like from "../assets/icons/like.svg";
-import Down from "../assets/icons/down.svg";
-import Up from "../assets/icons/up.svg";
-import Search from "../assets/icons/search.svg";
-import Left from "../assets/icons/left.svg";
-import Right from "../assets/icons/right.svg";
-import Notification from "../assets/icons/notification.svg";
-import Options from "../assets/icons/options.svg";
-import Phone from "../assets/icons/phone.svg";
-import Star from "../assets/icons/star.svg";
-import Add from "../assets/icons/add.svg";
-import Edit from "../assets/icons/edit.svg";
-import Note from "../assets/icons/note.svg";
-import Wallet from "../assets/icons/wallet.svg";
-
-export default {
-  Bag,
-  Wallet,
-  Add,
-  Home,
-  Discount,
-  Filter,
-  Down,
-  Up,
-  Search,
-  Left,
-  Right,
-  Notification,
-  Options,
-  Phone,
-  Star,
-  Like,
-  Edit,
-  Note,
+const icons = {
+  Bag: require("../assets/icons/bag.svg"),
+  Wallet: require("../assets/icons/wallet.svg"),
+  Add: require("../assets/icons/add.svg"),
+  Home: require("../assets/icons/home.svg"),
+  Discount: require("../assets/icons/discount.svg"),
+  Filter: require("../assets/icons/filter.svg"),
+  Down: require("../assets/icons/down.svg"),
+  Up: require("../assets/icons/up.svg"),
+  Search: require("../assets/icons/search.svg"),
+  Left: require("../assets/icons/left.svg"),
+  Right: require("../assets/icons/right.svg"),
+  Notification: require("../assets/icons/notification.svg"),
+  Options: require("../assets/icons/options.svg"),
+  Phone: require("../assets/icons/phone.svg"),
+  Star: require("../assets/icons/star.svg"),
+  Like: require("../assets/icons/like.svg"),
+  Edit: require("../assets/icons/edit.svg"),
+  Note: require("../assets/icons/note.svg"),
 };
+
+export default icons;

@@ -1,5 +1,3 @@
-import { ImageSourcePropType } from "react-native";
-
 const images = {
   Bean: require("../assets/images/bean.png"),
   Bike: require("../assets/images/bike.png"),

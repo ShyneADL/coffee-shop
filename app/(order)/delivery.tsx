@@ -122,12 +122,14 @@ const Bottom = () => {
             <Text className="text-base font-Sora-semibold text-black leading-[150%] tracking-0">
               10 minutes left
             </Text>
-            <Text className="font-Sora text-xs leading-[150%] text-lightGrey tracking-0 text-center mt-[2px]">
-              Delivery to{" "}
+            <View className="flex flex-row items-center">
+              <Text className="font-Sora text-xs leading-[150%] text-lightGrey tracking-0 text-center mt-[2px]">
+                Delivery to{" "}
+              </Text>
               <Text className="font-Sora-semibold text-xs leading-[150%] text-black tracking-0 text-center">
                 Paul M. Valley
               </Text>
-            </Text>
+            </View>
           </View>
 
           {/* Progress bars */}

@@ -81,12 +81,14 @@ const Detail = () => {
                 style={{ width: 20, height: 20 }}
                 className="size-5"
               />
-              <Text className="font-Sora-semibold text-[1rem] text-black">
-                {coffee?.rating || "0"}
+              <View className="flex items-center flex-row">
+                <Text className="font-Sora-semibold text-[1rem] text-black">
+                  {coffee?.rating || "0"}
+                </Text>
                 <Text className="font-Sora text-[0.75rem] text-lightGrey ml-[4px]">
                   (230)
                 </Text>
-              </Text>
+              </View>
             </View>
           </View>
           <View className="flex flex-row items-center gap-3">
