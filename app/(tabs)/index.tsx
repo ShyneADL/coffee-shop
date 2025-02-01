@@ -160,13 +160,7 @@ const Index = () => {
             showsVerticalScrollIndicator={false}
           >
             {filteredCoffees.map((coffee) => (
-              <Link
-                key={coffee.id}
-                href={{
-                  pathname: "/details/[id]",
-                  params: { ...coffee },
-                }}
-              >
+              <Link key={coffee.id} href={`/details/${coffee.id}`} asChild>
                 <CoffeeCard
                   image={coffee.image}
                   title={coffee.name}

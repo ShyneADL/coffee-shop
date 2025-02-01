@@ -11,14 +11,31 @@ import { router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useQuery } from "@tanstack/react-query";
 
 const Detail = () => {
-  // Extract the `id` and other parameters
-  const { id, ...params } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  async function fetchCoffeeById(id: number) {
+    const res = await fetch(`http://localhost:8081/details/${id}`);
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error("Error");
+    }
+    return data;
+  }
+
+  const {
+    data: coffee,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["coffees", id],
+    queryFn: () => fetchCoffeeById(Number(id)),
+  });
 
   const [activeSize, setActiveSize] = useState("M");
   const calculatePrice = () => {
-    const basePrice = Number(params.price);
+    const basePrice = Number(coffee.price);
 
     if (activeSize === "S") {
       return basePrice - 1.0;
@@ -57,7 +74,7 @@ const Detail = () => {
 
         {/* Coffee Image */}
         <Image
-          source={params.image}
+          source={coffee.image}
           resizeMode="cover"
           style={{
             width: "100%",
@@ -71,10 +88,10 @@ const Detail = () => {
         <View className="flex flex-row items-center justify-between mt-4">
           <View>
             <Text className="text-[1.25rem] text-black font-Sora-semibold leading-[150%] w-fit">
-              {params.name || "Coffee Title"}
+              {coffee.name || "Coffee Title"}
             </Text>
             <Text className="text-[0.75rem] text-lightGrey font-Sora leading-[120%] mt-1">
-              {params.category || "Coffee Category"}
+              {coffee.category || "Coffee Category"}
             </Text>
             <View className="flex flex-row gap-1 mt-4">
               <Image
@@ -84,7 +101,7 @@ const Detail = () => {
                 className="size-5"
               />
               <Text className="font-Sora-semibold text-[1rem] text-black">
-                {params.rating || "0"}
+                {coffee.rating || "0"}
                 <Text className="font-Sora text-[0.75rem] text-lightGrey ml-[4px]">
                   (230)
                 </Text>
@@ -116,7 +133,7 @@ const Detail = () => {
             Description
           </Text>
           <Text className="text-lightGrey font-Sora-light text-[0.875rem] leading-[150%] mt-2">
-            {params.description || "No description available."}
+            {coffee.description || "No description available."}
           </Text>
         </View>
 
@@ -190,20 +207,20 @@ const Detail = () => {
             $ {currentPrice.toFixed(2)}
           </Text>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           className="mt-6 flex flex-1 items-center justify-center py-4 rounded-[16px] bg-primary"
           onPress={() => {
             router.push({
               pathname: "/(order)/order",
-              params: {
+              coffee: {
                 id: id,
-                name: params.name,
-                category: params.category,
+                name: coffee.name,
+                category: coffee.category,
                 price: currentPrice,
                 size: activeSize,
-                image: params.image,
-                description: params.description,
-                rating: params.rating,
+                image: coffee.image,
+                description: coffee.description,
+                rating: coffee.rating,
               },
             });
           }}
@@ -214,7 +231,7 @@ const Detail = () => {
           >
             Buy Now
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
