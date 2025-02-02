@@ -126,7 +126,7 @@ const Order = () => {
                     {
                       translateX: translateX.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [0, 100], // Use numeric values for translation
+                        outputRange: ["0%", "100%"],
                       }),
                     },
                   ],
@@ -444,6 +444,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 12,
     position: "relative",
+    width: "100%",
   },
   sliderButton: {
     flex: 1,
@@ -451,11 +452,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 8,
     backgroundColor: "transparent",
+    zIndex: 10,
   },
   sliderButtonText: {
     fontSize: 16,
     lineHeight: 19.6,
     textAlign: "center",
+    zIndex: 100,
   },
   sliderBackground: {
     position: "absolute",
@@ -463,7 +466,7 @@ const styles = StyleSheet.create({
     width: "50%",
     backgroundColor: "#C67C4E",
     borderRadius: 8,
-    zIndex: -1,
+    zIndex: 1,
   },
   priceContainer: {
     position: "absolute",

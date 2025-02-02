@@ -352,6 +352,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     minHeight: 84,
+    gap: 34,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

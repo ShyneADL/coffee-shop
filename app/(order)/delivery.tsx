@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Animated,
   StyleSheet,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useRef, useCallback } from "react";
 import { router } from "expo-router";
@@ -20,8 +21,9 @@ import icons from "@/constants/icons";
 const Delivery = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar barStyle="dark-content" />
       <ImageBackground source={images.Map} style={styles.imageBackground}>
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView edges={["top"]} style={styles.safeArea}>
           {/* Top Part */}
           <View style={styles.topContainer}>
             <TouchableOpacity
@@ -56,7 +58,7 @@ export default Delivery;
 
 const Bottom = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = ["21%", "50%"];
+  const snapPoints = ["25%", "54%"];
 
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
@@ -83,11 +85,6 @@ const Bottom = () => {
     return () => pulseAnimation.stop();
   }, [pulseAnim]);
 
-  // callbacks
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
   // renders
   return (
     <GestureHandlerRootView style={styles.bottomSheetContainer}>
@@ -95,7 +92,6 @@ const Bottom = () => {
         index={0}
         snapPoints={snapPoints} // Snap points for the sheet
         ref={bottomSheetRef}
-        onChange={handleSheetChanges}
         style={styles.bottomSheet}
         handleIndicatorStyle={styles.handleIndicator}
       >
@@ -188,7 +184,7 @@ const styles = StyleSheet.create({
   },
   bottomSheetContainer: {
     flex: 1,
-    height: 322,
+    minHeight: 322,
   },
   bottomSheet: {
     flex: 1,
@@ -203,7 +199,7 @@ const styles = StyleSheet.create({
   bottomSheetContent: {
     width: "100%",
     alignItems: "center",
-    marginTop: 15,
+    marginVertical: 15,
     paddingHorizontal: 24,
   },
   textContainer: {
@@ -266,7 +262,7 @@ const styles = StyleSheet.create({
     borderColor: "#E3E3E3",
     paddingLeft: 12,
     paddingVertical: 10.5,
-    marginTop: 16,
+    marginTop: 24,
   },
   bikeIconContainer: {
     backgroundColor: "transparent",
