@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
   StyleSheet,
+  StatusBar,
 } from "react-native";
 import React, { useState } from "react";
 import { router, Link } from "expo-router";
@@ -36,6 +37,7 @@ const Index = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar backgroundColor="#111111" barStyle="dark-content" />
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         style={styles.scrollView}
@@ -74,11 +76,11 @@ const Index = () => {
             <View style={styles.bannerTextContainer}>
               <View style={styles.bannerTextWrapper}>
                 <Text style={styles.bannerText}>Buy one get</Text>
-                <View style={styles.bannerTextBackground} />
+                <View style={styles.bannerTextBackground1} />
               </View>
               <View style={styles.bannerTextWrapper}>
                 <Text style={styles.bannerText}>one FREE</Text>
-                <View style={styles.bannerTextBackground} />
+                <View style={styles.bannerTextBackground2} />
               </View>
             </View>
           </ImageBackground>
@@ -139,7 +141,8 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     backgroundColor: "#F9F9F9",
-    paddingBottom: 128,
+    paddingBottom: 1,
+    flex: 1,
   },
   scrollViewContent: {
     flexGrow: 1,
@@ -222,8 +225,17 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     zIndex: 2,
   },
-  bannerTextBackground: {
+  bannerTextBackground1: {
     width: 200,
+    height: 27,
+    backgroundColor: "black",
+    position: "absolute",
+    top: 19,
+    left: -1,
+    zIndex: 1,
+  },
+  bannerTextBackground2: {
+    width: 149,
     height: 27,
     backgroundColor: "black",
     position: "absolute",
@@ -263,6 +275,7 @@ const styles = StyleSheet.create({
     gap: 15,
     rowGap: 24,
     paddingTop: 16,
+    paddingBottom: 65,
     width: "100%",
   },
 });
