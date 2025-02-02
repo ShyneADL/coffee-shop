@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
   },
   activeSizeButton: {
     backgroundColor: "#EDEDED",
-    borderColor: "#ED5151",
+    borderColor: "#C67C4E",
   },
   sizeButtonText: {
     fontSize: 14,
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   activeSizeButtonText: {
-    color: "#ED5151",
+    color: "#C67C4E",
   },
   priceContainer: {
     position: "absolute",
@@ -370,7 +370,7 @@ const styles = StyleSheet.create({
   priceValue: {
     fontSize: 20,
     fontFamily: "Sora-Semibold",
-    color: "#ED5151",
+    color: "#C67C4E",
     marginTop: 4,
   },
   buyNowButton: {
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     paddingVertical: 16,
     borderRadius: 16,
-    backgroundColor: "#ED5151",
+    backgroundColor: "#C67C4E",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 import React from "react";
-import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import images from "@/constants/images";
 
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   button: {
-    backgroundColor: "#ED5151",
+    backgroundColor: "#C67C4E",
     borderRadius: 16,
     paddingVertical: 16,
     paddingHorizontal: 20,

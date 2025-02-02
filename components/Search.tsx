@@ -74,10 +74,10 @@ const styles = StyleSheet.create({
     lineHeight: 16.8,
     color: "white",
     flex: 1,
-    outline: "none",
+    // outline: "none",
   },
   filterButton: {
-    backgroundColor: "#ED5151",
+    backgroundColor: "#C67C4E",
     padding: 16,
     borderRadius: 12,
   },

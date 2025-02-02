@@ -499,7 +499,7 @@ const styles = StyleSheet.create({
   paymentMethodAmount: {
     fontSize: 12,
     fontFamily: "Sora-Semibold",
-    color: "#ED5151",
+    color: "#C67C4E",
   },
   downIcon: {
     width: 20,
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     paddingVertical: 16,
     borderRadius: 16,
-    backgroundColor: "#ED5151",
+    backgroundColor: "#C67C4E",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -134,13 +134,13 @@ const styles = StyleSheet.create({
   addButton: {
     borderRadius: 8,
     padding: 8,
-    backgroundColor: "#ED5151",
+    backgroundColor: "#C67C4E",
     alignItems: "center",
     justifyContent: "center",
   },
   addIcon: {
-    width: 32,
-    height: 32,
+    width: 16,
+    height: 16,
   },
 });
 

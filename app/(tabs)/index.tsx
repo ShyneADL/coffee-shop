@@ -49,7 +49,11 @@ const Index = () => {
               <Text style={styles.locationText}>Location</Text>
               <View style={styles.locationContainer}>
                 <Text style={styles.locationName}>Manhattan, New York</Text>
-                <Image source={icons.Down} style={styles.downIcon} />
+                <Image
+                  source={icons.Down}
+                  resizeMode="contain"
+                  style={styles.downIcon}
+                />
               </View>
             </View>
             {/* Search View */}
@@ -138,7 +142,7 @@ const styles = StyleSheet.create({
     paddingBottom: 128,
   },
   scrollViewContent: {
-    flexGrow: 1, // Ensures the content takes up the full height
+    flexGrow: 1,
   },
   topContainer: {
     width: "100%",
@@ -187,7 +191,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 12,
     paddingVertical: 13,
-    paddingHorizontal: 24,
   },
   promoContainer: {
     width: 60,
@@ -198,6 +201,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ED5151",
     justifyContent: "center",
     alignItems: "center",
+    marginLeft: 24,
   },
   promoText: {
     fontFamily: "Sora-Semibold",
@@ -206,6 +210,7 @@ const styles = StyleSheet.create({
   },
   bannerTextContainer: {
     width: 203,
+    marginLeft: 24,
   },
   bannerTextWrapper: {
     position: "relative",
@@ -240,7 +245,7 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   selectedCategoryButton: {
-    backgroundColor: "#ED5151",
+    backgroundColor: "#C67C4E",
   },
   categoryText: {
     fontFamily: "Sora",
