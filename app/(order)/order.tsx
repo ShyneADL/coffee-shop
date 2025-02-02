@@ -116,7 +116,6 @@ const Order = () => {
                 Pick Up
               </Animated.Text>
             </Pressable>
-
             {/* Animated Slider */}
             <Animated.View
               style={[
@@ -126,7 +125,7 @@ const Order = () => {
                     {
                       translateX: translateX.interpolate({
                         inputRange: [0, 1],
-                        outputRange: ["0%", "100%"],
+                        outputRange: [0, 159],
                       }),
                     },
                   ],
@@ -437,6 +436,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginTop: 32,
     padding: 4,
+    width: "100%",
   },
   sliderInnerContainer: {
     flexDirection: "row",
