@@ -6,8 +6,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import "react-native-gesture-handler";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useRouter } from "expo-router";
 
 import "./global.css";
+
 type RouteType = "(tabs)" | "onboarding" | null;
 
 export default function RootLayout() {
@@ -18,6 +20,8 @@ export default function RootLayout() {
     "Sora-SemiBold": require("../assets/fonts/Sora-SemiBold.ttf"),
     "Sora-Bold": require("../assets/fonts/Sora-Bold.ttf"),
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
@@ -33,9 +37,9 @@ export default function RootLayout() {
         if (fontsLoaded) {
           await SplashScreen.hideAsync();
           if (!hasSeenOnboarding) {
-            setInitialRoute("onboarding");
+            setInitialRoute("onboarding"); // Show onboarding if it's the first launch
           } else {
-            setInitialRoute("(tabs)");
+            setInitialRoute("(tabs)"); // Show main app if onboarding has been seen
           }
         }
       } catch (error) {
@@ -48,14 +52,22 @@ export default function RootLayout() {
     }
   }, [fontsLoaded, initialRoute]);
 
+  // Function to mark onboarding as completed
+  const completeOnboarding = async () => {
+    await AsyncStorage.setItem("hasSeenOnboarding", "true");
+    setInitialRoute("onboarding"); // Navigate to the main app
+    router.replace("/(tabs)"); // Use router to navigate to the main app
+    await AsyncStorage.removeItem("hasSeenOnboarding");
+  };
+
   if (!fontsLoaded || !initialRoute) {
-    return null;
+    return null; // Show nothing while loading
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack
-        initialRouteName={initialRoute}
+        initialRouteName={initialRoute} // Set the initial route dynamically
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
@@ -63,7 +75,6 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="onboarding" />
-
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(order)" />
         <Stack.Screen name="details/[id]" />

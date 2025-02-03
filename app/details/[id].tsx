@@ -2,10 +2,10 @@ import {
   View,
   Text,
   ScrollView,
-  Image,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { Image } from "expo-image";
 import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
@@ -46,7 +46,7 @@ const Detail = () => {
           >
             <Image
               source={icons.Left}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.icon}
             />
           </TouchableOpacity>
@@ -54,7 +54,7 @@ const Detail = () => {
           <TouchableOpacity style={styles.likeButton}>
             <Image
               source={icons.Like}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.icon}
             />
           </TouchableOpacity>
@@ -63,7 +63,7 @@ const Detail = () => {
         {/* Coffee Image */}
         <Image
           source={coffee?.image}
-          resizeMode="cover"
+          contentFit="cover"
           style={styles.coffeeImage}
         />
 
@@ -79,7 +79,7 @@ const Detail = () => {
             <View style={styles.ratingContainer}>
               <Image
                 source={images.Star}
-                resizeMode="contain"
+                contentFit="contain"
                 style={styles.starIcon}
               />
               <View style={styles.ratingTextContainer}>
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   activeSizeButton: {
-    backgroundColor: "#EDEDED",
+    backgroundColor: "#F9F2ED",
     borderColor: "#C67C4E",
   },
   sizeButtonText: {

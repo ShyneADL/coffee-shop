@@ -3,10 +3,10 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Image,
   ImageBackground,
   StyleSheet,
 } from "react-native";
+import { Image } from "expo-image";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
@@ -18,7 +18,7 @@ const Onboarding = () => {
       <View style={styles.imageContainer}>
         <Image
           source={images.Coffee6}
-          resizeMode="cover"
+          contentFit="cover"
           style={styles.image}
         />
       </View>
@@ -28,23 +28,21 @@ const Onboarding = () => {
         style={styles.gradientContainer}
       >
         <View style={styles.contentContainer}>
-          <View style={styles.gradientContainer}>
-            <Text style={styles.title}>
-              Fall in Love with Coffee in Blissful Delight!
-            </Text>
-            <Text style={styles.subtitle}>
-              Welcome to our cozy coffee corner, where every cup is a delightful
-              for you.
-            </Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                router.push("/(tabs)");
-              }}
-            >
-              <Text style={styles.buttonText}>Get Started</Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.title}>
+            Fall in Love with Coffee in Blissful Delight!
+          </Text>
+          <Text style={styles.subtitle}>
+            Welcome to our cozy coffee corner, where every cup is a delightful
+            for you.
+          </Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              router.push("/(tabs)");
+            }}
+          >
+            <Text style={styles.buttonText}>Get Started</Text>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </View>
@@ -57,7 +55,7 @@ const styles = StyleSheet.create({
   container: {
     position: "relative",
     flex: 1,
-    paddingBottom: 3,
+    paddingBottom: 12,
     margin: 0,
     backgroundColor: "#000",
     width: "100%",
@@ -79,13 +77,22 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    flexDirection: "column",
+    height: "100%",
+    width: "100%",
+    // flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
     paddingBottom: 24,
     zIndex: 20,
+    paddingHorizontal: 24,
   },
   gradientContainer: {
+    // flex: 1,
+    // width: "100%",
+    // flexDirection: "column",
+    // justifyContent: "flex-end",
+    marginTop: "120%",
+    alignItems: "center",
     paddingVertical: 24,
     paddingHorizontal: 24,
     zIndex: 2,
@@ -108,6 +115,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   button: {
+    flex: 1,
+    width: 327,
     backgroundColor: "#C67C4E",
     borderRadius: 16,
     paddingVertical: 16,

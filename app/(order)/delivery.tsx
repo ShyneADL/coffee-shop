@@ -1,16 +1,15 @@
 import {
   View,
   Text,
-  ScrollView,
-  Image,
   TouchableOpacity,
   ImageBackground,
   Animated,
   StyleSheet,
   StatusBar,
 } from "react-native";
-import React, { useEffect, useRef, useCallback } from "react";
-import { router } from "expo-router";
+import { Image } from "expo-image";
+import React, { useEffect, useRef } from "react";
+import { router, Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -22,34 +21,47 @@ const Delivery = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
-      <ImageBackground source={images.Map} style={styles.imageBackground}>
-        <SafeAreaView edges={["top"]} style={styles.safeArea}>
-          {/* Top Part */}
-          <View style={styles.topContainer}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => router.back()}
-            >
-              <Image
-                source={icons.Left}
-                style={styles.icon}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+      <Image
+        source={images.Map}
+        cachePolicy="memory-disk"
+        style={styles.imageBackground}
+      />
+      <SafeAreaView edges={["top"]} style={styles.safeArea}>
+        {/* Top Part */}
+        <View style={styles.topContainer}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
+            <Image
+              source={icons.Left}
+              style={styles.icon}
+              contentFit="contain"
+            />
+          </TouchableOpacity>
 
-            <TouchableOpacity style={styles.gpsButton}>
-              <Image
-                source={images.GPS}
-                resizeMode="contain"
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.gpsButton}>
+            <Image
+              source={images.GPS}
+              contentFit="contain"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </View>
+        <Link style={{ position: "absolute", bottom: 200 }} href="/onboarding">
+          <View
+            style={{
+              backgroundColor: "transparent",
+              zIndex: 200,
+              width: "100%",
+              height: 200,
+            }}
+          />
+        </Link>
 
-          {/* Bottom Part */}
-          <Bottom />
-        </SafeAreaView>
-      </ImageBackground>
+        {/* Bottom Part */}
+        <Bottom />
+      </SafeAreaView>
     </GestureHandlerRootView>
   );
 };
@@ -142,7 +154,7 @@ const Bottom = () => {
               <Image
                 source={icons.Phone}
                 style={styles.phoneIcon}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
           </View>
@@ -157,6 +169,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     flex: 1,
+    position: "absolute",
+    inset: 0,
   },
   safeArea: {
     flex: 1,

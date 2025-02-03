@@ -2,12 +2,12 @@ import {
   View,
   Text,
   ScrollView,
-  Image,
   TouchableOpacity,
   Pressable,
   Animated,
   StyleSheet,
 } from "react-native";
+import { Image } from "expo-image";
 import React, { useState, useEffect, useRef } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,6 +19,7 @@ import { coffees } from "@/constants/coffee";
 interface CountProps {
   count: number;
   setCount: (count: number) => void;
+  method: string;
 }
 
 const Order = () => {
@@ -59,7 +60,7 @@ const Order = () => {
           >
             <Image
               source={icons.Left}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.icon}
             />
           </TouchableOpacity>
@@ -67,7 +68,7 @@ const Order = () => {
           <TouchableOpacity style={styles.likeButton}>
             <Image
               source={icons.Like}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.icon}
             />
           </TouchableOpacity>
@@ -135,11 +136,7 @@ const Order = () => {
           </View>
         </View>
 
-        {method === "Deliver" ? (
-          <Deliver count={count} setCount={setCount} />
-        ) : (
-          <PickUp count={count} setCount={setCount} />
-        )}
+        <Deliver count={count} setCount={setCount} method={method} />
       </ScrollView>
 
       {/* Coffee Price */}
@@ -154,7 +151,7 @@ const Order = () => {
           </View>
           <Image
             source={icons.Down}
-            resizeMode="contain"
+            contentFit="contain"
             style={styles.downIcon}
           />
         </View>
@@ -171,7 +168,7 @@ const Order = () => {
   );
 };
 
-const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
+const Deliver: React.FC<CountProps> = ({ count, setCount, method }) => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { price } = useLocalSearchParams<{ price: string }>();
 
@@ -183,18 +180,29 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
     <View style={styles.deliverContainer}>
       {/* Top part */}
       <View style={styles.addressContainer}>
-        <Text style={styles.addressTitle}>Deliver Address</Text>
+        {method === "Deliver" ? (
+          <Text style={styles.addressTitle}>Deliver Address</Text>
+        ) : (
+          <Text style={styles.addressTitle}>Pickup Address</Text>
+        )}
+
         <Text style={styles.addressName}>Paul M. Valley</Text>
-        <Text style={styles.addressDetails}>
-          1235 Amsterdam Ave, Apt 4B, New York, NY 10027
-        </Text>
+        {method === "Deliver" ? (
+          <Text style={styles.addressDetails}>
+            1235 Amsterdam Ave, Apt 4B, New York, NY 10027
+          </Text>
+        ) : (
+          <Text style={styles.addressDetails}>
+            456 W 37th St, Apt 9C, New York, NY 10018
+          </Text>
+        )}
 
         {/* Edit Address */}
         <View style={styles.editAddressContainer}>
           <View style={styles.editButton}>
             <Image
               source={icons.Edit}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.editIcon}
             />
             <Text>Edit Address</Text>
@@ -202,7 +210,7 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           <View style={styles.editButton}>
             <Image
               source={icons.Note}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.editIcon}
             />
             <Text>Add Note</Text>
@@ -218,7 +226,7 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           <Image
             source={coffee?.image}
             style={styles.coffeeImage}
-            resizeMode="cover"
+            contentFit="cover"
           />
           <View>
             <Text style={styles.coffeeName}>{coffee?.name}</Text>
@@ -257,14 +265,18 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
           <View style={styles.discountInfo}>
             <Image
               source={icons.Discount}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.discountIcon}
             />
-            <Text style={styles.discountText}>1 Discount is Applied</Text>
+            {method === "Deliver" ? (
+              <Text style={styles.discountText}>1 Discount is Applied</Text>
+            ) : (
+              <Text style={styles.discountText}>Add a Voucher</Text>
+            )}
           </View>
           <Image
             source={icons.Right}
-            resizeMode="contain"
+            contentFit="contain"
             style={styles.rightIcon}
           />
         </View>
@@ -276,124 +288,15 @@ const Deliver: React.FC<CountProps> = ({ count, setCount }) => {
             <Text style={styles.paymentSummaryLabel}>Price</Text>
             <Text style={styles.paymentSummaryValue}>{calculatedPrice}</Text>
           </View>
-          <View style={styles.paymentSummaryItem}>
-            <Text style={styles.paymentSummaryLabel}>Delivery Fee</Text>
-            <View style={styles.deliveryFeeContainer}>
-              <Text style={styles.deliveryFeeStriked}>$ 2.0</Text>
-              <Text style={styles.deliveryFee}>$1.0</Text>
+          {method === "Deliver" && (
+            <View style={styles.paymentSummaryItem}>
+              <Text style={styles.paymentSummaryLabel}>Delivery Fee</Text>
+              <View style={styles.deliveryFeeContainer}>
+                <Text style={styles.deliveryFeeStriked}>$ 2.0</Text>
+                <Text style={styles.deliveryFee}>$1.0</Text>
+              </View>
             </View>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-const PickUp: React.FC<CountProps> = ({ count, setCount }) => {
-  const { id } = useLocalSearchParams<{ id: string }>();
-  const { price } = useLocalSearchParams<{ price: string }>();
-
-  // Find the coffee by id
-  const coffee = coffees.find((c) => c.id === Number(id));
-  const calculatedPrice = (Number(price) * count).toFixed(2);
-
-  return (
-    <View style={styles.pickupContainer}>
-      {/* Top part */}
-      <View style={styles.addressContainer}>
-        <Text style={styles.addressTitle}>Pickup Address</Text>
-        <Text style={styles.addressName}>Paul M. Valley</Text>
-        <Text style={styles.addressDetails}>
-          456 W 37th St, Apt 9C, New York, NY 10018
-        </Text>
-
-        {/* Edit Address */}
-        <View style={styles.editAddressContainer}>
-          <View style={styles.editButton}>
-            <Image
-              source={icons.Edit}
-              resizeMode="contain"
-              style={styles.editIcon}
-            />
-            <Text>Edit Address</Text>
-          </View>
-          <View style={styles.editButton}>
-            <Image
-              source={icons.Note}
-              resizeMode="contain"
-              style={styles.editIcon}
-            />
-            <Text>Add Note</Text>
-          </View>
-        </View>
-
-        {/* Divider */}
-        <View style={styles.divider} />
-      </View>
-      {/* Middle Part */}
-      <View style={styles.coffeeDetailsContainer}>
-        <View style={styles.coffeeInfo}>
-          <Image
-            source={coffee?.image}
-            style={styles.coffeeImage}
-            resizeMode="cover"
-          />
-          <View>
-            <Text style={styles.coffeeName}>{coffee?.name}</Text>
-            <Text style={styles.coffeeCategory}>{coffee?.category}</Text>
-          </View>
-        </View>
-        <View style={styles.quantityContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              if (count > 1) {
-                setCount(count - 1);
-              }
-            }}
-          >
-            <Image
-              source={count === 1 ? images.MinusFaded : images.Minus}
-              style={styles.quantityIcon}
-            />
-          </TouchableOpacity>
-          <Text style={styles.quantityText}>{count}</Text>
-          <TouchableOpacity
-            onPress={() => {
-              setCount(count + 1);
-            }}
-          >
-            <Image source={images.Plus} style={styles.quantityIcon} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      {/* Brown Line */}
-      <View style={styles.brownLine} />
-
-      {/* Payment Section */}
-      <View>
-        <View style={styles.discountContainer}>
-          <View style={styles.discountInfo}>
-            <Image
-              source={icons.Discount}
-              resizeMode="contain"
-              style={styles.discountIcon}
-            />
-            <Text style={styles.discountText}>Add a Voucher</Text>
-          </View>
-          <Image
-            source={icons.Right}
-            resizeMode="contain"
-            style={styles.rightIcon}
-          />
-        </View>
-        {/* Payment Summary */}
-        <View style={styles.paymentSummaryContainer}>
-          <Text style={styles.paymentSummaryTitle}>Payment Summary</Text>
-
-          <View style={styles.paymentSummaryItem}>
-            <Text style={styles.paymentSummaryLabel}>Price</Text>
-            <Text style={styles.paymentSummaryValue}>{calculatedPrice}</Text>
-          </View>
+          )}
         </View>
       </View>
     </View>
@@ -478,7 +381,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingTop: 16,
+    paddingBottom: 46,
   },
   paymentMethodContainer: {
     flexDirection: "row",

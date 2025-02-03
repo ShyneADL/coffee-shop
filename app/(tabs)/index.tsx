@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Image,
   ScrollView,
   ImageBackground,
   TouchableOpacity,
@@ -9,8 +8,9 @@ import {
   StyleSheet,
   StatusBar,
 } from "react-native";
+import { Image } from "expo-image";
 import React, { useState } from "react";
-import { router, Link } from "expo-router";
+import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
@@ -53,7 +53,7 @@ const Index = () => {
                 <Text style={styles.locationName}>Manhattan, New York</Text>
                 <Image
                   source={icons.Down}
-                  resizeMode="contain"
+                  contentFit="contain"
                   style={styles.downIcon}
                 />
               </View>
@@ -64,12 +64,13 @@ const Index = () => {
         </View>
         {/* Mid - Bottom part */}
         <View style={styles.midBottomContainer}>
-          {/* Buy one */}
-          <ImageBackground
-            source={images.Banner}
-            resizeMode="cover"
-            style={styles.banner}
-          >
+          {/* Buy one banner */}
+          <View style={styles.banner}>
+            <Image
+              source={images.Banner}
+              contentFit="cover"
+              style={{ width: "100%", position: "absolute", inset: 0 }}
+            />
             <View style={styles.promoContainer}>
               <Text style={styles.promoText}>Promo</Text>
             </View>
@@ -83,7 +84,7 @@ const Index = () => {
                 <View style={styles.bannerTextBackground2} />
               </View>
             </View>
-          </ImageBackground>
+          </View>
           {/* Coffee list */}
           <ScrollView
             horizontal
@@ -254,7 +255,6 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 6,
     backgroundColor: "#F0F0F0",
-    marginRight: 16,
   },
   selectedCategoryButton: {
     backgroundColor: "#C67C4E",

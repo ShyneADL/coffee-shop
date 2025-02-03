@@ -3,11 +3,11 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  Image,
   ImageSourcePropType,
   StyleSheet,
 } from "react-native";
 import React from "react";
+import { Image } from "expo-image";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 
@@ -30,11 +30,11 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
     <View style={styles.container}>
       {/* Image */}
       <View style={styles.imageContainer}>
-        <Image source={image} style={styles.image} resizeMode="cover" />
+        <Image source={image} style={styles.image} contentFit="cover" />
         <View style={styles.ratingContainer}>
           <Image
             source={images.Star}
-            resizeMode="contain"
+            contentFit="contain"
             style={styles.starIcon}
           />
           <Text style={styles.ratingText}>{rating}</Text>
@@ -50,7 +50,7 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
           <View style={styles.addButton}>
             <Image
               source={icons.Add}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.addIcon}
             />
           </View>
