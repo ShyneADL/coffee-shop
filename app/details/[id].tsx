@@ -172,7 +172,7 @@ const Detail = () => {
 
       {/* Coffee Price */}
       <View style={styles.priceContainer}>
-        <View>
+        <View style={{ width: 76 }}>
           <Text style={styles.priceLabel}>Price</Text>
           <Text style={styles.priceValue}>$ {currentPrice.toFixed(2)}</Text>
         </View>

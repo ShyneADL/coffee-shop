@@ -62,6 +62,9 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
+    justifyContent: "space-between",
+    flex: 1,
     width: 156,
     gap: 8,
     backgroundColor: "white",
